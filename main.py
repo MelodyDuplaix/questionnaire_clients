@@ -59,6 +59,60 @@ if not st.session_state.clicked:
 
 
 
+# Bonton envoi mail
+import smtplib
+from email.mime.text import MIMEText
+
+
+if st.button('envoi email'):
+# Création de l'email
+    import smtplib
+    from email.mime.multipart import MIMEMultipart
+    from email.mime.text import MIMEText
+    from getpass import getpass
+
+    # Informations sur l'expéditeur
+    expediteur = "melo.surseine@gmail.com"
+    # Ouvrir le fichier texte contenant le mot de passe
+    with open("token.txt", "r") as fichier:
+        mot_de_passe = fichier.read().strip()
+
+
+
+    # Informations sur le destinataire
+    destinataire = "melo.surseine@gmail.com"
+
+    # Créer un objet MIMEMultipart
+    message = MIMEMultipart()
+
+    # Configurer les détails du message
+    message['From'] = expediteur
+    message['To'] = destinataire
+    message['Subject'] = "Sujet de l'e-mail"
+
+    # Corps du message
+    corps_message = "Ceci est le corps de l'e-mail."
+
+    # Attacher le corps du message au message
+    message.attach(MIMEText(corps_message, 'plain'))
+
+    # Établir une connexion avec le serveur SMTP de Gmail
+    serveur_smtp = smtplib.SMTP('smtp.gmail.com', 587)
+    serveur_smtp.starttls()
+
+    # Connexion au compte Gmail
+    serveur_smtp.login(expediteur, mot_de_passe)
+
+    # Envoyer l'e-mail
+    texte_complet = message.as_string()
+    serveur_smtp.sendmail(expediteur, destinataire, texte_complet)
+
+    # Fermer la connexion SMTP
+    serveur_smtp.quit()
+
+    print("E-mail envoyé avec succès.")
+
+
 
 
 
