@@ -22,7 +22,7 @@ header_avec_image("Questionnaire", "Questionnaire")
 if 'clicked' not in st.session_state:
     st.session_state.clicked = False
 
-def click_button(prenom, nom):
+def click_button(prenom, nom, block):
     st.session_state.clicked = True
     block.write(f"Bienvenue {prenom} {nom}")
 
@@ -54,7 +54,7 @@ block = st.container()
 block.write("")
 
 if not st.session_state.clicked:
-    submitted = st.button("Envoyer", on_click=click_button, args=[prenom, nom])
+    submitted = st.button("Envoyer", on_click=click_button, args=[prenom, nom, block])
 
 
 
