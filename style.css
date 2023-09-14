@@ -1,68 +1,9 @@
-/* couleur du corps */
-.css-fg4pbf {
-    background-color: white !important;
-}
-/* supression de la croix pour refermer la sidebar */
-.css-ztfqz8 {
-    display: none;
-}
-/* couleur de la sidebar */
-.css-6qob1r {
-    background-color: white;
-}
-/* format du titre */
-h1 {
-    font-family: "Comic Sans MS";
-    font-size: 35px;
-}
 
 /* image en haut à gauche */
 .css-1kyxreq {
     position:absolute;
     bottom: 10px;
     right: 200px;
-}
-
-/* Titre du menu */
-.css-1s3y5qe {
-    border: none;
-    display: none;
-}
-.css-vmtpwk h1 {
-    position: absolute;
-    bottom: 230px;
-    left: 75px
-}
-
-
-/* enlever la flèche pour dévellopper le menu */
-button[kind="header"] {
-    display: none;
-}
-
-/* titre des filtres */
-.titre_filtre {
-    /* display: none; */
-    text-align: center;
-    font-size: 14px;
-    font-weight: bold;
-    font-family: "Comic Sans MS";
-}
-/* réduire la taille des filtres */
-.css-vmtpwk .css-16idsys p {
-    font-size: 12px;
-}
-.css-vmtpwk .css-vmtpwk {
-    padding-top: 0;
-}
-.css-vmtpwk .st-af {
-    font-size: 12px !important;
-}
-
-
-/* empecher la barre de scroll */
-.css-6qob1r {
-    overflow-y: hidden;
 }
 
 
@@ -78,20 +19,6 @@ button[kind="header"] {
     height: auto;
 }
 
-
-/* agrandir le KPI */
-code {
-    text-align: center;
-    position: absolute;
-    flex-direction: row;
-    left: 10px;
-    height: 30px;
-    color: rgb(0, 0, 0);
-    font-family: 'Comic Sans MS';
-    background-color: white;
-    font-size: 50px;
-
-}
 
 /* footer */
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.css-uf99v8.ea3mdgi5 > div.block-container.css-1y4p8pa.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(8) {
@@ -124,33 +51,3 @@ code {
     display: none;
 }
 
-
-/* enlever les settings */
-#bui1 > div > div > ul:nth-child(1) > ul:nth-child(2) {
-    display: none;
-}
-
-/* bordure du menu */
-div[data-testid="stSidebarNav"] {
-    border-color: #06aaaa;
-    border-width: 2px;
-    border-style: solid;
-    border-radius: 6px;
-}
-
-
-/* boutton reset */
-
-#root > div:nth-child(1) > div.withScreencast > div > div > div > section.css-vk3wp9.eczjsme11 > div.css-6qob1r.eczjsme3 > div.css-vmtpwk.eczjsme4 > div > div:nth-child(1) > div > div:nth-child(6) {
-    text-align: center;
-}
-
-/* Correction de l'affichage de la table avec @st.cache_data */
-.stHidden {
-    display: none !important;
-}
-.css-tvhsbf .glideDataEditor {
-    overflow-y: visible;
-    min-height: auto;
-    max-height: none;
-}

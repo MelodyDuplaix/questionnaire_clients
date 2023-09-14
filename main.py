@@ -3,6 +3,7 @@ import streamlit as st
 import pandas as pd
 from bibliotheque.lib import  *
 from st_pages import Page, show_pages, add_page_title
+import datetime
 
 
 # Configurations
@@ -17,15 +18,25 @@ header_avec_image("Questionnaire", "Questionnaire")
 # Code principal
 
 # Formulaire
-with st.form("Formulaire d'ajout", clear_on_submit=True):
-    
+
+if 'clicked' not in st.session_state:
+    st.session_state.clicked = False
+
+def click_button(prenom, nom):
+    st.session_state.clicked = True
+    block.write(f"Bienvenue {prenom} {nom}")
+
+prenom =""
+nom=""
+
+if not st.session_state.clicked:
     prenom = st.text_area("Prénom", max_chars=25, placeholder="Pas de prénom", height=1, key="prenom")
-    
+    st.write("hello world")
     nom = st.text_area("Nom", max_chars=25, placeholder="Pas de nom", height=1, key="nom")
-    
+
     mail = st.text_area("Mail", max_chars=50, placeholder="Pas de mail", height=1, key="mail")
-    if mail and( not "@" in mail or " " in mail):
-        st.write(":red[Le mail n'est pas valide !]")
+    # if mail and( not "@" in mail or " " in mail):
+    #     st.write(":red[Le mail n'est pas valide !]")
         
     today = datetime.datetime.now()
     date_de_naissance = st.date_input(
@@ -38,11 +49,14 @@ with st.form("Formulaire d'ajout", clear_on_submit=True):
         "Date d'entrée dans l'entreprise", min_value= datetime.date((today.year-60), 1, 1),
         format="DD/MM/YYYY", key="date_arrive"
     )
-    
-    
-    submitted = st.form_submit_button("Envoyer")
-    if submitted and prenom and nom and mail:
-        pass
+
+block = st.container()
+block.write("")
+
+if not st.session_state.clicked:
+    submitted = st.button("Envoyer", on_click=click_button, args=[prenom, nom])
+
+
 
 
 

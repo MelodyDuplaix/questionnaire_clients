@@ -78,11 +78,7 @@ def config_site(f_layout):
     st.set_page_config(
         page_title="Questionnaire",
         page_icon="📄",
-        layout=f_layout,
-        menu_items={
-            "Get Help": " ",
-            "About" : " "
-        }
+        layout=f_layout
     )
     formatage_de_la_page("style.css")
 
