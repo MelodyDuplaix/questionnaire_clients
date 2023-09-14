@@ -1,6 +1,5 @@
 # Import des bibliothèques
 import streamlit as st
-import pandas as pd
 from bibliotheque.lib import  *
 from st_pages import Page, show_pages, add_page_title
 import datetime
@@ -16,6 +15,15 @@ config_site("centered")
 header_avec_image("Questionnaire", "Questionnaire")
 
 # Code principal
+
+
+
+
+
+
+
+
+
 
 # Formulaire
 
@@ -59,6 +67,12 @@ if not st.session_state.clicked:
 
 
 
+
+
+
+
+
+
 # Bonton envoi mail
 import smtplib
 from email.mime.text import MIMEText
@@ -69,6 +83,7 @@ if st.button('envoi email'):
     import smtplib
     from email.mime.multipart import MIMEMultipart
     from email.mime.text import MIMEText
+    from email.mime.application import MIMEApplication
     from getpass import getpass
 
     # Informations sur l'expéditeur
@@ -95,6 +110,16 @@ if st.button('envoi email'):
 
     # Attacher le corps du message au message
     message.attach(MIMEText(corps_message, 'plain'))
+
+    # Pièce jointe
+    nom_piece_jointe = "CV-Melody-Duplaix.pdf"  # Remplacez par le nom de votre fichier
+    chemin_fichier = "assets/CV-Melody-Duplaix.pdf"  # Remplacez par le chemin de votre fichier
+
+    with open(chemin_fichier, "rb") as fichier:
+        piece_jointe = MIMEApplication(fichier.read(), _subtype="txt")
+        piece_jointe.add_header('content-disposition', 'attachment', filename=nom_piece_jointe)
+        message.attach(piece_jointe)
+
 
     # Établir une connexion avec le serveur SMTP de Gmail
     serveur_smtp = smtplib.SMTP('smtp.gmail.com', 587)
