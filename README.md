@@ -7,6 +7,7 @@
 	- transformer les réponses en un pdf
 	- envoyer le pdf
 	- mettre à disposition le pdf
+    - styliser le questionnaire
 - En cours
 	- monter le formulaire
 - Fait
