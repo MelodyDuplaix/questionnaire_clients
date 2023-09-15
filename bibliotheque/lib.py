@@ -121,7 +121,7 @@ def set_stage(i):
 
 def generer_pdf():
     # Nom du fichier PDF
-    pdf_file = f"reponses/réponses_questionnaire_nnaire_{date}_{st.session_state.liste_reponse4['prenom']}_{st.session_state.liste_reponse4['nom']}.pdf"
+    pdf_file = f"reponses/réponses_questionnaire_{date}_{st.session_state.liste_reponse4['prenom']}_{st.session_state.liste_reponse4['nom']}.pdf"
     
     # Création du document PDF
     document = SimpleDocTemplate(pdf_file, pagesize=letter)
@@ -235,8 +235,8 @@ def envoi_mail():
     message.attach(MIMEText(corps_message, 'plain'))
 
     # Pièce jointe
-    nom_piece_jointe = f"reponses/réponses_questionnaire_nnaire_{date}_{st.session_state.liste_reponse4['prenom']}_{st.session_state.liste_reponse4['nom']}.pdf"  # Remplacez par le nom de votre fichier
-    chemin_fichier = f"reponses/réponses_questionnaire_nnaire_{date}_{st.session_state.liste_reponse4['prenom']}_{st.session_state.liste_reponse4['nom']}.pdf"  # Remplacez par le chemin de votre fichier
+    nom_piece_jointe = f"reponses/réponses_questionnaire_{date}_{st.session_state.liste_reponse4['prenom']}_{st.session_state.liste_reponse4['nom']}.pdf"  # Remplacez par le nom de votre fichier
+    chemin_fichier = f"reponses/réponses_questionnaire_{date}_{st.session_state.liste_reponse4['prenom']}_{st.session_state.liste_reponse4['nom']}.pdf"  # Remplacez par le chemin de votre fichier
 
     with open(chemin_fichier, "rb") as fichier:
         piece_jointe = MIMEApplication(fichier.read(), _subtype="txt")

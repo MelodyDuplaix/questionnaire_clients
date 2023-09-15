@@ -239,7 +239,7 @@ if st.session_state.stage == "Fin":
     st.download_button(
         label="Télécharger le PDF",
         data=pdf_bytes,
-        file_name=f"reponses/réponses_questionnaire_nnaire_{date}.pdf",  # Nom du fichier PDF
+        file_name=f"reponses/réponses_questionnaire_{date}_{st.session_state.liste_reponse4['prenom']}_{st.session_state.liste_reponse4['nom']}.pdf",  # Nom du fichier PDF
         key="download_pdf",
     )
 
