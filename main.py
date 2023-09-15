@@ -3,6 +3,11 @@ import streamlit as st
 from bibliotheque.lib import  *
 from st_pages import Page, show_pages, add_page_title
 import datetime
+import streamlit as st
+from reportlab.lib.pagesizes import letter
+from reportlab.platypus import SimpleDocTemplate, Paragraph
+from reportlab.lib.styles import getSampleStyleSheet
+import base64  # Importer la bibliothèque base64
 
 
 # Configurations
@@ -15,6 +20,38 @@ config_site("centered")
 header_avec_image("Questionnaire", "")
 
 # Code principal
+
+
+
+
+
+
+
+
+def generer_pdf():
+    # Créer un objet de document PDF
+    pdf_file = "assets/exemple.pdf"
+    document = SimpleDocTemplate(pdf_file, pagesize=letter)
+
+    # Créer un style pour le texte
+    styles = getSampleStyleSheet()
+    style_normal = styles['Normal']
+
+    # Créer une liste de contenu
+    content = []
+
+    # Ajouter du texte au contenu (automatiquement positionné)
+    texte = """
+    Ceci est un exemple de document PDF généré avec Streamlit.
+    Le positionnement du texte est géré automatiquement.
+    """
+
+    content.append(Paragraph(texte, style_normal))
+
+    # Générer le PDF
+    document.build(content)
+
+    return pdf_file
 
 
 
@@ -231,6 +268,21 @@ if st.session_state.stage == "Fin":
     # Vérification des données de la quatrième partie
     for rep in st.session_state.liste_reponse4:
         block.write(f"- {rep}")
+
+    pdf_file = generer_pdf()
+    st.success("Le PDF a été généré avec succès!")
+
+    # Bouton de téléchargement avec le bon type MIME pour PDF
+    with open(pdf_file, "rb") as f:
+        pdf_bytes = f.read()
+    st.download_button(
+        label="Télécharger le PDF",
+        data=pdf_bytes,
+        file_name="assets/exemple.pdf",  # Nom du fichier PDF
+        key="download_pdf",
+    )
+
+    
     
 
 
@@ -339,57 +391,6 @@ if st.session_state.stage == "Fin":
 
 
 
-
-# # bouton pdf
-# import streamlit as st
-# from reportlab.lib.pagesizes import letter
-# from reportlab.platypus import SimpleDocTemplate, Paragraph
-# from reportlab.lib.styles import getSampleStyleSheet
-# import base64  # Importer la bibliothèque base64
-
-# # Fonction pour générer le PDF
-# def generer_pdf():
-#     # Créer un objet de document PDF
-#     pdf_file = "assets/exemple.pdf"
-#     document = SimpleDocTemplate(pdf_file, pagesize=letter)
-
-#     # Créer un style pour le texte
-#     styles = getSampleStyleSheet()
-#     style_normal = styles['Normal']
-
-#     # Créer une liste de contenu
-#     content = []
-
-#     # Ajouter du texte au contenu (automatiquement positionné)
-#     texte = """
-#     Ceci est un exemple de document PDF généré avec Streamlit.
-#     Le positionnement du texte est géré automatiquement.
-#     """
-
-#     content.append(Paragraph(texte, style_normal))
-
-#     # Générer le PDF
-#     document.build(content)
-
-#     return pdf_file
-
-# # Interface utilisateur Streamlit
-# st.title("Générateur de PDF")
-
-# # Bouton pour générer le PDF
-# if st.button("Générer le PDF"):
-#     pdf_file = generer_pdf()
-#     st.success("Le PDF a été généré avec succès!")
-
-#     # Bouton de téléchargement avec le bon type MIME pour PDF
-#     with open(pdf_file, "rb") as f:
-#         pdf_bytes = f.read()
-#     st.download_button(
-#         label="Télécharger le PDF",
-#         data=pdf_bytes,
-#         file_name="assets/exemple.pdf",  # Nom du fichier PDF
-#         key="download_pdf",
-#     )
 
 
         
