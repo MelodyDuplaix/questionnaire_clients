@@ -1,14 +1,15 @@
 ## Création d'une application pour permettre de faire remplir un questionnaire à des potentiels nouveaux clients
 
 - A faire:
-	- implémenter les choix "autres" avec l'afficahge d'un input
+	- implémenter les choix "autres" avec l'affichage d'un input
 	- envoyer le pdf
 	- mettre à disposition le pdf
+	- gérer l'autocompletion du navigateur dans le formulaire
 	- styliser le questionnaire
 - En cours
-	- transformer les réponses en un pdf
 	- comprendre la mise en page pdf avec ReportLab
 - Fait
+	- transformer les réponses en un pdf (date:: 15-09-2023 ve)
 	- monter le formulaire (date:: 15-09-2023 ve)
 	- Gérer les étapes du formulaire (date:: 15-09-2023 ve)
 	- tester la mise à dispo d'une piece jointe (date:: 15-09-2023 ve)
