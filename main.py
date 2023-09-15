@@ -14,7 +14,6 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
-from getpass import getpass
 
 date = datetime.datetime.now().strftime("%d-%m-%Y")
 
@@ -240,7 +239,7 @@ if st.session_state.stage == "Fin":
     st.download_button(
         label="Télécharger le PDF",
         data=pdf_bytes,
-        file_name=f"réponses_questionnaire_{date}.pdf",  # Nom du fichier PDF
+        file_name=f"reponses/réponses_questionnaire_nnaire_{date}.pdf",  # Nom du fichier PDF
         key="download_pdf",
     )
 

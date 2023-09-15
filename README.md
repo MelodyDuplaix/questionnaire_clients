@@ -2,12 +2,16 @@
 
 - A faire:
 	- implémenter les choix "autres" avec l'affichage d'un input
+	- mettre en place des contraintes d'input (inputs obligatoires et contraintes de formats)
 	- gérer l'autocompletion du navigateur dans le formulaire
 	- styliser le questionnaire
+	- faire un bouton retour en arrière
 - En cours
-	- envoyer le pdf
-	- comprendre la mise en page pdf avec ReportLab
+	- implémenter les choix "autres" avec l'affichage d'un input
+	- Améliorer la mise en page du pdf
 - Fait
+	- comprendre la mise en page pdf avec ReportLab (date:: 15-09-2023 ve)
+	- envoyer le pdf (date:: 15-09-2023 ve)
 	- mettre à disposition le pdf (date:: 15-09-2023 ve)
 	- transformer les réponses en un pdf (date:: 15-09-2023 ve)
 	- monter le formulaire (date:: 15-09-2023 ve)

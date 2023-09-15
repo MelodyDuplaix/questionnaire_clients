@@ -4,18 +4,19 @@ from bibliotheque.lib import  *
 from st_pages import Page, show_pages, add_page_title
 import datetime
 import streamlit as st
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
 from reportlab.lib.pagesizes import letter
-from reportlab.platypus import SimpleDocTemplate, Paragraph
-from reportlab.lib.styles import getSampleStyleSheet
-from bs4 import BeautifulSoup
-import base64  # Importer la bibliothèque base64
+from reportlab.lib import colors
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
+pdfmetrics.registerFont(TTFont('Comic Sans MS', 'assets/ComicSans.ttf'))
 date = datetime.datetime.now().strftime("%d-%m-%Y")
 from PIL import Image
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
-from getpass import getpass
 
 # Définition des fonctions
 
@@ -119,70 +120,90 @@ def set_stage(i):
 
 
 def generer_pdf():
-    """génère un pdf avec les réponses chargées dans les sessions states
-
-    Args:
-        0
-    Return:
-        pdf_file {string} : nom du pdf généré
-    """
+    # Nom du fichier PDF
+    pdf_file = f"reponses/réponses_questionnaire_nnaire_{date}_{st.session_state.liste_reponse4['prenom']}_{st.session_state.liste_reponse4['nom']}.pdf"
     
-    pdf_file = f"réponses_questionnaire_{date}_{st.session_state.liste_reponse4['prenom']}_{st.session_state.liste_reponse4['nom']}.pdf"
+    # Création du document PDF
     document = SimpleDocTemplate(pdf_file, pagesize=letter)
     
-    # Créer un style pour le texte
+    # Styles personnalisés
     styles = getSampleStyleSheet()
-    style_normal = styles['Normal']
+    style_titre = ParagraphStyle(
+        "StyleTitre",
+        parent=styles["Heading1"],
+        fontSize=16,
+        textColor=colors.blue,
+        alignment=1,
+        spaceBefore=12,
+        spaceAfter=12,
+        fontName='Comic Sans MS'
+    )
+    style_sous_titre = ParagraphStyle(
+        "StyleSousTitre",
+        parent=styles["Heading2"],
+        fontSize=14,
+        textColor=colors.blue,
+        alignment=0,
+        spaceBefore=12,
+        spaceAfter=12,
+        fontName='Comic Sans MS'
+    )
+    style_normal = ParagraphStyle(
+        "StyleNormal",
+        parent=styles["Normal"],
+        fontSize=12,
+        textColor=colors.black,
+        alignment=0,
+        spaceBefore=6,
+        spaceAfter=6,
+        leftIndent=30,
+    )
     
-    # Créer une liste de contenu
+    # Contenu du PDF
     content = []
     
-    # Ajouter du texte au contenu (automatiquement positionné)
-    texte = f"<b>Récapitulatif du questionnaire</b>"
+    # Titre principal
+    titre = Paragraph("Recapitulatif du questionnaire", style_titre)
+    content.append(titre)
+    content.append(Paragraph(f"{st.session_state.liste_reponse4['prenom']} {st.session_state.liste_reponse4['nom']}", style_titre))
     
-    texte_contacts = f"""
-    {st.session_state.liste_reponse4["prenom"]}  {st.session_state.liste_reponse4["nom"]}<br />
-    adresse: {st.session_state.liste_reponse4["adresse"]}<br />
-    mail: {st.session_state.liste_reponse4["mail"]}<br />
-    téléphone: {st.session_state.liste_reponse4["telephone"]}<br />
-    Contact de préférence {st.session_state.liste_reponse4["horaire_appel"]} via {st.session_state.liste_reponse4["support"]}<br />
-    <br />
-    """
+    # Informations de contact
+    content.append(Spacer(1, 12))  # Espace vertical
+    content.append(Paragraph("Informations de contact :", style_sous_titre))
+    content.append(Paragraph(f"Adresse : {st.session_state.liste_reponse4['adresse']}", style_normal))
+    content.append(Paragraph(f"Mail : {st.session_state.liste_reponse4['mail']}", style_normal))
+    content.append(Paragraph(f"Téléphone : {st.session_state.liste_reponse4['telephone']}", style_normal))
+    content.append(Paragraph(f"Contact de préférence : {st.session_state.liste_reponse4['horaire_appel']} via {' ou '.join(st.session_state.liste_reponse4['support'])}", style_normal))
     
-    texte_reponses = f"""
-    recommandé par {st.session_state.liste_reponse["recommandation"]}<br />
-    Les habitudes alimentaires jouent un rôle dans l'état de santé : {st.session_state.liste_reponse["alimentation_sante"]}<br />
-    Vous accordez de l'importance à votre alimentation à {st.session_state.liste_reponse["importance_alimentation"]} sur 10<br />
-    Votre alimentation actuelle vous satisfait à {st.session_state.liste_reponse["satisfaction_alimentation"]}<br />
-    Régime alimentaire: {st.session_state.liste_reponse["regime_alimentaire"]}<br />
-    Etat actuel de bien-être en général: {st.session_state.liste_reponse["etat_bien_etre"]}<br />
-    <br />
-    Vous souhaitez changer dans votre quotidien: <br />
-    """
-    
-    texte_reponse3 = f"""
-    Thème qui vous intéresse le plus: {st.session_state.liste_reponse2["theme_prefere"]}<br />
-    Si vous deviez changer quelque chose dans votre quotidien, pensez-vous qu'un accompagnement personnalisé et gratuit soit un plus ? : {st.session_state.liste_reponse2["accompagnement_perso"]}<br />
-    Lorsque vous commandez en ligne, préférez-vous avoir un interlocuteur identifié qui puisse vous accompagner au besoin ? : {st.session_state.liste_reponse2["interlocuteur_perso"]}<br />
-    <br />
-    """
-    
-    texte_rendez_vous_presentation = f"Vous avez choisi un rendez-vous pour une présentation personnalisée.<br />"
-    texte_rendez_vous_telephone = f"Vous avez choisi un rendez-vous par téléphone à partir du : {str(st.session_state.liste_reponse3['date'])}. <br />"
-    
-    # Ajouter du texte au contenu du PDF
-    content.append(Paragraph(texte, style_normal))
-    content.append(Paragraph(texte_contacts, style_normal))
-    content.append(Paragraph(texte_reponses, style_normal))
+    # Réponses au questionnaire
+    content.append(Spacer(1, 12))  # Espace vertical
+    content.append(Paragraph("Reponses au questionnaire :", style_sous_titre))
+    content.append(Paragraph(f"Recommandé par : {st.session_state.liste_reponse['recommandation']}", style_normal))
+    content.append(Paragraph(f"Les habitudes alimentaires jouent un rôle dans l'état de santé : {st.session_state.liste_reponse['alimentation_sante']}", style_normal))
+    content.append(Paragraph(f"Importance accordée à l'alimentation : {st.session_state.liste_reponse['importance_alimentation']}/10", style_normal))
+    content.append(Paragraph(f"Satisfaction actuelle de l'alimentation : {st.session_state.liste_reponse['satisfaction_alimentation']}/10", style_normal))
+    content.append(Paragraph(f"Régime alimentaire : {st.session_state.liste_reponse['regime_alimentaire']}", style_normal))
+    content.append(Paragraph(f"État actuel de bien-être en général : {st.session_state.liste_reponse['etat_bien_etre']}", style_normal))
+    content.append(Paragraph("Changements souhaités dans le quotidien :", style_normal))
     for rep in st.session_state.liste_reponse2["choix_multiple"]:
-        content.append(Paragraph(f"- {rep}", style_normal))
-    content.append(Paragraph(texte_reponse3, style_normal))
+        content.append(Paragraph(f" • {rep}", style_normal))
+    content.append(Paragraph(f"Thème qui m'intéresse le plus : {st.session_state.liste_reponse2['theme_prefere']}", style_normal))
+    
+    # Accompagnement personnalisé et interlocuteur identifié
+    content.append(Spacer(1, 12))  # Espace vertical
+    content.append(Paragraph("Choix d'accompagnemant :", style_sous_titre))
+    content.append(Paragraph(f"Accompagnement personnalisé et gratuit : {st.session_state.liste_reponse2['accompagnement_perso']}", style_normal))
+    content.append(Paragraph(f"Interlocuteur identifié pour les commandes en ligne : {st.session_state.liste_reponse2['interlocuteur_perso']}", style_normal))
+    
+    # Rendez-vous
+    content.append(Spacer(1, 12))  # Espace vertical
+    content.append(Paragraph("Rendez-vous :", style_sous_titre))
     if st.session_state.liste_reponse3["rendez_vous"] == "Je souhaite prendre rendez-vous pour une présentation personnalisée":
-        content.append(Paragraph(texte_rendez_vous_presentation, style_normal))
+        content.append(Paragraph("Vous avez choisi un rendez-vous pour une présentation personnalisée.", style_normal))
     else:
-        content.append(Paragraph(texte_rendez_vous_telephone, style_normal))
-        
-    # Générer le PDF
+        content.append(Paragraph(f"Vous avez choisi un rendez-vous par téléphone à partir du : {st.session_state.liste_reponse3['date']}.", style_normal))
+    
+    # Génération du PDF
     document.build(content)
     
     return pdf_file
@@ -214,8 +235,8 @@ def envoi_mail():
     message.attach(MIMEText(corps_message, 'plain'))
 
     # Pièce jointe
-    nom_piece_jointe = f"réponses_questionnaire_{date}_{st.session_state.liste_reponse4['prenom']}_{st.session_state.liste_reponse4['nom']}.pdf"  # Remplacez par le nom de votre fichier
-    chemin_fichier = f"réponses_questionnaire_{date}_{st.session_state.liste_reponse4['prenom']}_{st.session_state.liste_reponse4['nom']}.pdf"  # Remplacez par le chemin de votre fichier
+    nom_piece_jointe = f"reponses/réponses_questionnaire_nnaire_{date}_{st.session_state.liste_reponse4['prenom']}_{st.session_state.liste_reponse4['nom']}.pdf"  # Remplacez par le nom de votre fichier
+    chemin_fichier = f"reponses/réponses_questionnaire_nnaire_{date}_{st.session_state.liste_reponse4['prenom']}_{st.session_state.liste_reponse4['nom']}.pdf"  # Remplacez par le chemin de votre fichier
 
     with open(chemin_fichier, "rb") as fichier:
         piece_jointe = MIMEApplication(fichier.read(), _subtype="txt")
