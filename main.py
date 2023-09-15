@@ -27,83 +27,6 @@ header_avec_image("Questionnaire", "")
 
 
 
-
-
-
-def generer_pdf():
-    # Créer un objet de document PDF
-    pdf_file = f"réponses_questionnaire_{date}.pdf"
-    document = SimpleDocTemplate(pdf_file, pagesize=letter)
-
-    # Créer un style pour le texte
-    styles = getSampleStyleSheet()
-    style_normal = styles['Normal']
-
-    # Créer une liste de contenu
-    content = []
-
-    # Ajouter du texte au contenu (automatiquement positionné)
-    texte = f"<b>Récapitulatif du questionnaire</b>"
-
-    texte_contacts = f"""
-    {st.session_state.liste_reponse4["prenom"]}  {st.session_state.liste_reponse4["nom"]}<br />
-    adresse: {st.session_state.liste_reponse4["adresse"]}<br />
-    mail: {st.session_state.liste_reponse4["mail"]}<br />
-    téléphone: {st.session_state.liste_reponse4["telephone"]}<br />
-    Contact de préférence {st.session_state.liste_reponse4["horaire_appel"]} via {st.session_state.liste_reponse4["support"]}<br />
-    <br />
-    """
-
-    texte_reponses = f"""
-    recommandé par {st.session_state.liste_reponse["recommandation"]}<br />
-    Les habitudes alimentaires jouent un rôle dans l'état de santé : {st.session_state.liste_reponse["alimentation_sante"]}<br />
-    Vous accordez de l'importance à votre alimentation à {st.session_state.liste_reponse["importance_alimentation"]} sur 10<br />
-    Votre alimentation actuelle vous satisfait à {st.session_state.liste_reponse["satisfaction_alimentation"]}<br />
-    Régime alimentaire: {st.session_state.liste_reponse["regime_alimentaire"]}<br />
-    Etat actuel de bien-être en général: {st.session_state.liste_reponse["etat_bien_etre"]}<br />
-    <br />
-    Vous souhaitez changer dans votre quotidien: <br />
-    """
-
-    texte_reponse3 = f"""
-    Thème qui vous intéresse le plus: {st.session_state.liste_reponse2["theme_prefere"]}<br />
-    Si vous deviez changer quelque chose dans votre quotidien, pensez-vous qu'un accompagnement personnalisé et gratuit soit un plus ? : {st.session_state.liste_reponse2["accompagnement_perso"]}<br />
-    Lorsque vous commandez en ligne, préférez-vous avoir un interlocuteur identifié qui puisse vous accompagner au besoin ? : {st.session_state.liste_reponse2["interlocuteur_perso"]}<br />
-    <br />
-    """
-
-    texte_rendez_vous_presentation = f"Vous avez choisi un rendez-vous pour une présentation personnalisée.<br />"
-
-    texte_rendez_vous_telephone = f"Vous avez choisi un rendez-vous par téléphone à partir du : {str(st.session_state.liste_reponse3['date'])}. <br />"
-
-    # Ajouter du texte au contenu du PDF
-    content.append(Paragraph(texte, style_normal))
-    content.append(Paragraph(texte_contacts, style_normal))
-    content.append(Paragraph(texte_reponses, style_normal))
-    
-    for rep in st.session_state.liste_reponse2["choix_multiple"]:
-        content.append(Paragraph(f"- {rep}", style_normal))
-    
-    content.append(Paragraph(texte_reponse3, style_normal))
-    
-    if st.session_state.liste_reponse3["rendez_vous"] == "Je souhaite prendre rendez-vous pour une présentation personnalisée":
-        content.append(Paragraph(texte_rendez_vous_presentation, style_normal))
-    else:
-        content.append(Paragraph(texte_rendez_vous_telephone, style_normal))
-
-    # Générer le PDF
-    document.build(content)
-
-    return pdf_file
-
-
-
-
-
-
-
-
-
 # Formulaire
 
 
@@ -112,15 +35,7 @@ if 'stage' not in st.session_state:
     st.session_state.stage = "début"
 
 #  fonction changement de stage
-def set_stage(i):
-    """change l'état du stage avec l'entrée
-
-    Args:
-        i (string): état dans lequel on met le stage
-    """
-    st.session_state.stage = i
-
-    
+   
 
 # Première partie du questionnaire si l'état est à "début"
 if st.session_state.stage == "début":
