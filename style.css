@@ -8,25 +8,25 @@
 
 
 /* réduire la hauteur des text_area */
-#root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.css-uf99v8.ea3mdgi5 > div.block-container.css-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div.css-r421ms.e10yg2by1 > div:nth-child(1) > div > div:nth-child(3) > div > div.css-1om1ktf.ezh4s2r0 > div > div > textarea, #root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.css-uf99v8.ea3mdgi5 > div.block-container.css-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div.css-r421ms.e10yg2by1 > div:nth-child(1) > div > div:nth-child(2) > div > div.css-1om1ktf.ezh4s2r0 > div > div > textarea, #root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.css-uf99v8.ea3mdgi5 > div.block-container.css-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div.css-r421ms.e10yg2by1 > div:nth-child(1) > div > div:nth-child(1) > div > div.css-1om1ktf.ezh4s2r0 > div > div > textarea, #root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.css-uf99v8.ea3mdgi5 > div.block-container.css-1y4p8pa.ea3mdgi4 > div:nth-child(1) > div > div.css-r421ms.e10yg2by1 > div:nth-child(1) > div > div:nth-child(1) > div > div.css-1om1ktf.ezh4s2r0 > div > div > textarea, #root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.css-uf99v8.ea3mdgi5 > div.block-container.css-1y4p8pa.ea3mdgi4 > div:nth-child(1) > div > div.css-r421ms.e10yg2by1 > div:nth-child(1) > div > div:nth-child(2) > div > div.css-1om1ktf.ezh4s2r0 > div > div > textarea, #root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.css-uf99v8.ea3mdgi5 > div.block-container.css-1y4p8pa.ea3mdgi4 > div:nth-child(1) > div > div.css-r421ms.e10yg2by1 > div:nth-child(1) > div > div:nth-child(3) > div > div.css-1om1ktf.ezh4s2r0 > div > div > textarea {
+/* #root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.css-uf99v8.ea3mdgi5 > div.block-container.css-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div.css-r421ms.e10yg2by1 > div:nth-child(1) > div > div:nth-child(3) > div > div.css-1om1ktf.ezh4s2r0 > div > div > textarea, #root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.css-uf99v8.ea3mdgi5 > div.block-container.css-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div.css-r421ms.e10yg2by1 > div:nth-child(1) > div > div:nth-child(2) > div > div.css-1om1ktf.ezh4s2r0 > div > div > textarea, #root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.css-uf99v8.ea3mdgi5 > div.block-container.css-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div.css-r421ms.e10yg2by1 > div:nth-child(1) > div > div:nth-child(1) > div > div.css-1om1ktf.ezh4s2r0 > div > div > textarea, #root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.css-uf99v8.ea3mdgi5 > div.block-container.css-1y4p8pa.ea3mdgi4 > div:nth-child(1) > div > div.css-r421ms.e10yg2by1 > div:nth-child(1) > div > div:nth-child(1) > div > div.css-1om1ktf.ezh4s2r0 > div > div > textarea, #root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.css-uf99v8.ea3mdgi5 > div.block-container.css-1y4p8pa.ea3mdgi4 > div:nth-child(1) > div > div.css-r421ms.e10yg2by1 > div:nth-child(1) > div > div:nth-child(2) > div > div.css-1om1ktf.ezh4s2r0 > div > div > textarea, #root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.css-uf99v8.ea3mdgi5 > div.block-container.css-1y4p8pa.ea3mdgi4 > div:nth-child(1) > div > div.css-r421ms.e10yg2by1 > div:nth-child(1) > div > div:nth-child(3) > div > div.css-1om1ktf.ezh4s2r0 > div > div > textarea {
     height: 50px !important;
     min-height: fit-content;
     overflow-y: hidden;
-}
+} */
 
-.css-m8hsoe, .css-1oe5cao {
+/* .css-m8hsoe, .css-1oe5cao {
     max-height: none !important;
     height: auto;
-}
+} */
 
 
 /* footer */
-#root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.css-uf99v8.ea3mdgi5 > div.block-container.css-1y4p8pa.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(8) {
+/* #root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.css-uf99v8.ea3mdgi5 > div.block-container.css-1y4p8pa.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(8) {
     text-align: center;
     position: fixed;
     left: 0px;
     bottom: 0px;
-}
+} */
 .footer {
     text-align: center;
     position: fixed;

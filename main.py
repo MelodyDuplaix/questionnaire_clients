@@ -50,6 +50,7 @@ if not st.session_state.clicked:
     ["Pas du tout", "Ca dépends", "Tout à fait", "Plutôt non", "Plutôt oui"])
     
     importance_alimentation = st.slider('Sur une échelle de 1 à 10, quelle importance accordez-vous à votre alimentation dans votre vie quotidienne ?', 0, 10, 5)
+    
     satisfaction_alimentation = st.slider('Sur une échelle de 1 à 10, à quel point votre alimentation actuelle vous satisfait-elle ?', 0, 10, 5)
 
     regime_alimentaire = st.radio(
