@@ -12,7 +12,7 @@ config_site("centered")
 
 
 
-header_avec_image("Questionnaire", "Questionnaire")
+header_avec_image("Questionnaire", "")
 
 # Code principal
 
@@ -30,39 +30,44 @@ header_avec_image("Questionnaire", "Questionnaire")
 if 'clicked' not in st.session_state:
     st.session_state.clicked = False
 
-def click_button(prenom, nom, block):
+def click_button(block, liste_reponse1):
     st.session_state.clicked = True
-    block.write(f"Bienvenue {prenom} {nom}")
+    block.write(f"Bienvenue")
+    block.write(liste_reponse1)
 
-prenom =""
-nom=""
 
 if not st.session_state.clicked:
-    prenom = st.text_area("Prénom", max_chars=25, placeholder="Pas de prénom", height=1, key="prenom")
-    st.write("hello world")
-    nom = st.text_area("Nom", max_chars=25, placeholder="Pas de nom", height=1, key="nom")
+    """
+    Bonjour,
 
-    mail = st.text_area("Mail", max_chars=50, placeholder="Pas de mail", height=1, key="mail")
-    # if mail and( not "@" in mail or " " in mail):
-    #     st.write(":red[Le mail n'est pas valide !]")
-        
-    today = datetime.datetime.now()
-    date_de_naissance = st.date_input(
-        "Date de naissance", max_value=datetime.date((today.year-18), 1, 1), min_value= datetime.date((today.year-100), 1, 1),
-        format="DD/MM/YYYY", value= datetime.date((today.year-30), 1, 1), key="date_naissance"
-    )
+    Ce questionnaire est une introduction pour savoir s'il serait pertinent pour vous de découvrir nos solutions de bien être. 
+    Avant de commencer, par qui avez vous eu ce questionnaire : 
+    """
+    recommandation = st.text_input("Il m'a été recommandé par :", max_chars=25, placeholder="Nom de la personne", key="recommandation")
+    
+    alimentation_sante = st.radio(
+    "Pensez-vous que les habitudes alimentaires jouent un rôle dans l'état de santé",
+    ["Pas du tout", "Ca dépends", "Tout à fait", "Plutôt non", "Plutôt oui"])
+    
+    importance_alimentation = st.slider('Sur une échelle de 1 à 10, quelle importance accordez-vous à votre alimentation dans votre vie quotidienne ?', 0, 10, 5)
+    satisfaction_alimentation = st.slider('Sur une échelle de 1 à 10, à quel point votre alimentation actuelle vous satisfait-elle ?', 0, 10, 5)
 
-    genre = st.selectbox("Genre", ("F","M"), help="Homme : H Femme : F", key="genre")
-    date_arrive = st.date_input(
-        "Date d'entrée dans l'entreprise", min_value= datetime.date((today.year-60), 1, 1),
-        format="DD/MM/YYYY", key="date_arrive"
-    )
+    regime_alimentaire = st.radio(
+    "Êtes-vous",
+    ["Aucun", "Végétarien", "Végétalien", "Flexitarien", "Autre"])
+
+
+    etat_bien_etre = st.select_slider(
+    "Pour finir avec les questions générales, globalement, comment estimez vous votre état actuel de bien-être en général :",
+    ["Mauvais", "Passable", "Moyen", "Bon", "Excellent"], value="Moyen")
+
+    liste_reponse1 = [recommandation, alimentation_sante, importance_alimentation, satisfaction_alimentation, regime_alimentaire, etat_bien_etre]
 
 block = st.container()
 block.write("")
 
 if not st.session_state.clicked:
-    submitted = st.button("Envoyer", on_click=click_button, args=[prenom, nom, block])
+    submitted = st.button("Envoyer", on_click=click_button, args=[block, liste_reponse1])
 
 
 
@@ -73,109 +78,132 @@ if not st.session_state.clicked:
 
 
 
-# Bonton envoi mail
-import smtplib
-from email.mime.text import MIMEText
-
-
-if st.button('envoi email'):
-# Création de l'email
-    import smtplib
-    from email.mime.multipart import MIMEMultipart
-    from email.mime.text import MIMEText
-    from email.mime.application import MIMEApplication
-    from getpass import getpass
-
-    # Informations sur l'expéditeur
-    expediteur = "melo.surseine@gmail.com"
-    # Ouvrir le fichier texte contenant le mot de passe
-    with open("token.txt", "r") as fichier:
-        mot_de_passe = fichier.read().strip()
 
 
 
-    # Informations sur le destinataire
-    destinataire = "melo.surseine@gmail.com"
-
-    # Créer un objet MIMEMultipart
-    message = MIMEMultipart()
-
-    # Configurer les détails du message
-    message['From'] = expediteur
-    message['To'] = destinataire
-    message['Subject'] = "Sujet de l'e-mail"
-
-    # Corps du message
-    corps_message = "Ceci est le corps de l'e-mail."
-
-    # Attacher le corps du message au message
-    message.attach(MIMEText(corps_message, 'plain'))
-
-    # Pièce jointe
-    nom_piece_jointe = "CV-Melody-Duplaix.pdf"  # Remplacez par le nom de votre fichier
-    chemin_fichier = "assets/CV-Melody-Duplaix.pdf"  # Remplacez par le chemin de votre fichier
-
-    with open(chemin_fichier, "rb") as fichier:
-        piece_jointe = MIMEApplication(fichier.read(), _subtype="txt")
-        piece_jointe.add_header('content-disposition', 'attachment', filename=nom_piece_jointe)
-        message.attach(piece_jointe)
+# # Bonton envoi mail
+# import smtplib
+# from email.mime.text import MIMEText
 
 
-    # Établir une connexion avec le serveur SMTP de Gmail
-    serveur_smtp = smtplib.SMTP('smtp.gmail.com', 587)
-    serveur_smtp.starttls()
+# if st.button('envoi email'):
+# # Création de l'email
+#     import smtplib
+#     from email.mime.multipart import MIMEMultipart
+#     from email.mime.text import MIMEText
+#     from email.mime.application import MIMEApplication
+#     from getpass import getpass
 
-    # Connexion au compte Gmail
-    serveur_smtp.login(expediteur, mot_de_passe)
-
-    # Envoyer l'e-mail
-    texte_complet = message.as_string()
-    serveur_smtp.sendmail(expediteur, destinataire, texte_complet)
-
-    # Fermer la connexion SMTP
-    serveur_smtp.quit()
-
-    print("E-mail envoyé avec succès.")
+#     # Informations sur l'expéditeur
+#     expediteur = "melo.surseine@gmail.com"
+#     # Ouvrir le fichier texte contenant le mot de passe
+#     with open("token.txt", "r") as fichier:
+#         mot_de_passe = fichier.read().strip()
 
 
 
+#     # Informations sur le destinataire
+#     destinataire = "melo.surseine@gmail.com"
+
+#     # Créer un objet MIMEMultipart
+#     message = MIMEMultipart()
+
+#     # Configurer les détails du message
+#     message['From'] = expediteur
+#     message['To'] = destinataire
+#     message['Subject'] = "Sujet de l'e-mail"
+
+#     # Corps du message
+#     corps_message = "Ceci est le corps de l'e-mail."
+
+#     # Attacher le corps du message au message
+#     message.attach(MIMEText(corps_message, 'plain'))
+
+#     # Pièce jointe
+#     nom_piece_jointe = "CV-Melody-Duplaix.pdf"  # Remplacez par le nom de votre fichier
+#     chemin_fichier = "assets/CV-Melody-Duplaix.pdf"  # Remplacez par le chemin de votre fichier
+
+#     with open(chemin_fichier, "rb") as fichier:
+#         piece_jointe = MIMEApplication(fichier.read(), _subtype="txt")
+#         piece_jointe.add_header('content-disposition', 'attachment', filename=nom_piece_jointe)
+#         message.attach(piece_jointe)
 
 
+#     # Établir une connexion avec le serveur SMTP de Gmail
+#     serveur_smtp = smtplib.SMTP('smtp.gmail.com', 587)
+#     serveur_smtp.starttls()
 
+#     # Connexion au compte Gmail
+#     serveur_smtp.login(expediteur, mot_de_passe)
+
+#     # Envoyer l'e-mail
+#     texte_complet = message.as_string()
+#     serveur_smtp.sendmail(expediteur, destinataire, texte_complet)
+
+#     # Fermer la connexion SMTP
+#     serveur_smtp.quit()
+
+#     print("E-mail envoyé avec succès.")
 
 
 
 
-# bouton pdf
-if st.button("envoi pdf"):
-    from fpdf import FPDF
-    from reportlab.lib.pagesizes import letter
-    from reportlab.platypus import SimpleDocTemplate, Paragraph
-    from reportlab.lib.styles import getSampleStyleSheet
 
-    # Créer un objet de document PDF
-    pdf_file = "assets/exemple.pdf"
-    document = SimpleDocTemplate(pdf_file, pagesize=letter)
 
-    # Créer un style pour le texte
-    styles = getSampleStyleSheet()
-    style_normal = styles['Normal']
 
-    # Créer une liste de contenu
-    content = []
 
-    # Ajouter du texte au contenu (automatiquement positionné)
-    texte = """
-    Ceci est un exemple de document PDF généré avec Platypus.
-    Le positionnement du texte est géré automatiquement.
-    """
 
-    content.append(Paragraph(texte, style_normal))
 
-    # Générer le PDF
-    document.build(content)
+# # bouton pdf
+# import streamlit as st
+# from reportlab.lib.pagesizes import letter
+# from reportlab.platypus import SimpleDocTemplate, Paragraph
+# from reportlab.lib.styles import getSampleStyleSheet
+# import base64  # Importer la bibliothèque base64
 
-    print(f"Le PDF a été créé : {pdf_file}")
+# # Fonction pour générer le PDF
+# def generer_pdf():
+#     # Créer un objet de document PDF
+#     pdf_file = "assets/exemple.pdf"
+#     document = SimpleDocTemplate(pdf_file, pagesize=letter)
+
+#     # Créer un style pour le texte
+#     styles = getSampleStyleSheet()
+#     style_normal = styles['Normal']
+
+#     # Créer une liste de contenu
+#     content = []
+
+#     # Ajouter du texte au contenu (automatiquement positionné)
+#     texte = """
+#     Ceci est un exemple de document PDF généré avec Streamlit.
+#     Le positionnement du texte est géré automatiquement.
+#     """
+
+#     content.append(Paragraph(texte, style_normal))
+
+#     # Générer le PDF
+#     document.build(content)
+
+#     return pdf_file
+
+# # Interface utilisateur Streamlit
+# st.title("Générateur de PDF")
+
+# # Bouton pour générer le PDF
+# if st.button("Générer le PDF"):
+#     pdf_file = generer_pdf()
+#     st.success("Le PDF a été généré avec succès!")
+
+#     # Bouton de téléchargement avec le bon type MIME pour PDF
+#     with open(pdf_file, "rb") as f:
+#         pdf_bytes = f.read()
+#     st.download_button(
+#         label="Télécharger le PDF",
+#         data=pdf_bytes,
+#         file_name="assets/exemple.pdf",  # Nom du fichier PDF
+#         key="download_pdf",
+#     )
 
 
         
