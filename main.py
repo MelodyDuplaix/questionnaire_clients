@@ -91,10 +91,6 @@ if st.session_state.stage == "deuxième bloc":
     
     # Intro
     st.write("Maintenant, parlons de vous :")
-    
-    # Vérification des données de la première partie
-    for rep in st.session_state.liste_reponse:
-        block.write(f"{rep} : {st.session_state.liste_reponse[rep]}")
         
     # questionnaire checkbox multiples
     
@@ -164,10 +160,6 @@ if st.session_state.stage == "troisième bloc":
     # creation de la date si il n'en choisit pas
     liste_reponse3 = {}
     liste_reponse3["date"] = None
-    
-    # Vérification des données de la deuxième partie
-    for rep in st.session_state.liste_reponse2:
-        block.write(f"{rep} : {st.session_state.liste_reponse2[rep]}")
         
     # Intro
     "Merci d'avoir répondu ! Et maintenant :"
@@ -187,9 +179,6 @@ if st.session_state.stage == "troisième bloc":
 
 # Troisième partie du questionnaire si le stage est à "troisième bloc"
 if st.session_state.stage == "quatrième bloc":
-    # Vérification des données de la troisième partie
-    for rep in st.session_state.liste_reponse3:
-        block.write(f"{rep} : {st.session_state.liste_reponse3[rep]}")
         
     # Intro
     "Pour que nous puissions vous recontacter, merci de remplir les information ci dessous :"
@@ -239,10 +228,6 @@ if st.session_state.stage == "quatrième bloc":
 
 # Affichage final
 if st.session_state.stage == "Fin":
-    # Vérification des données de la quatrième partie
-    for rep in st.session_state.liste_reponse4:
-        block.write(f"{rep} : {st.session_state.liste_reponse4[rep]}")
-
 
 
     # Générer le pdf

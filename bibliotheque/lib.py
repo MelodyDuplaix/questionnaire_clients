@@ -127,7 +127,7 @@ def generer_pdf():
         pdf_file {string} : nom du pdf généré
     """
     
-    pdf_file = f"réponses_questionnaire_{date}.pdf"
+    pdf_file = f"réponses_questionnaire_{date}_{st.session_state.liste_reponse4['prenom']}_{st.session_state.liste_reponse4['nom']}.pdf"
     document = SimpleDocTemplate(pdf_file, pagesize=letter)
     
     # Créer un style pour le texte
@@ -214,8 +214,8 @@ def envoi_mail():
     message.attach(MIMEText(corps_message, 'plain'))
 
     # Pièce jointe
-    nom_piece_jointe = f"réponses_questionnaire_{date}.pdf"  # Remplacez par le nom de votre fichier
-    chemin_fichier = f"réponses_questionnaire_{date}.pdf"  # Remplacez par le chemin de votre fichier
+    nom_piece_jointe = f"réponses_questionnaire_{date}_{st.session_state.liste_reponse4['prenom']}_{st.session_state.liste_reponse4['nom']}.pdf"  # Remplacez par le nom de votre fichier
+    chemin_fichier = f"réponses_questionnaire_{date}_{st.session_state.liste_reponse4['prenom']}_{st.session_state.liste_reponse4['nom']}.pdf"  # Remplacez par le chemin de votre fichier
 
     with open(chemin_fichier, "rb") as fichier:
         piece_jointe = MIMEApplication(fichier.read(), _subtype="txt")
