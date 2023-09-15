@@ -55,9 +55,9 @@ if st.session_state.stage == "début":
     # questionnaire
     recommandation = st.text_input("Il m'a été recommandé par :", max_chars=25, placeholder="Nom de la personne", key="recommandation")
     
-    alimentation_sante = st.radio(
+    alimentation_sante = st.select_slider(
     "Pensez-vous que les habitudes alimentaires jouent un rôle dans l'état de santé",
-    ["Pas du tout", "Ca dépends", "Tout à fait", "Plutôt non", "Plutôt oui"])
+    ["Pas du tout", "Plutôt non", "Ca dépends", "Plutôt oui", "Tout à fait"], value="Ca dépends")
     
     importance_alimentation = st.slider('Sur une échelle de 1 à 10, quelle importance accordez-vous à votre alimentation dans votre vie quotidienne ?', 0, 10, 5)
     
@@ -110,6 +110,11 @@ if st.session_state.stage == "deuxième bloc":
     choix_vieillir = st.checkbox("Bien vieillir")
     choix_autre = st.checkbox("Autre")
     
+    theme_prefere = st.text_input("Parmi les thèmes abordés précédemment, quel est celui sur lequel vous seriez le plus intéressé(e) à en savoir plus ?")
+    
+    accompagnement_perso = st.radio("Si vous deviez changer quelque chose dans votre quotidien, pensez-vous qu'un accompagnement personnalisé et gratuit soit un plus ?", ["non","oui"])
+    interlocuteur_perso = st.radio("Lorsque vous commandez en ligne, préférez-vous avoir un interlocuteur identifié qui puisse vous accompagner au besoin ?", ["non","oui"])
+    
     
     
     # Création de la liste avec les checkbox choix multiples
@@ -140,18 +145,123 @@ if st.session_state.stage == "deuxième bloc":
         liste_reponse2.append("Autre")
     
     # envoi de la liste dans un session_state
-    st.session_state.liste_reponse2 = liste_reponse2
+    st.session_state.liste_reponse2 = [liste_reponse2, theme_prefere, accompagnement_perso, interlocuteur_perso ]
     
 
 # bouton pour envoyer à la troisième partie si le stage est à deuxième bloc
 if st.session_state.stage == "deuxième bloc":
-    st.button("Envoyer", on_click=set_stage, args=["troisième bloc"])
+    st.button("Suite", on_click=set_stage, args=["troisième bloc"])
 
 
 # Troisième partie du questionnaire si le stage est à "troisième bloc"
+
 if st.session_state.stage == "troisième bloc":
+    
+    # creation de la date si il n'en choisit pas
+    date = None
+    
+    # Vérification des données de la deuxième partie
     for rep in st.session_state.liste_reponse2:
         block.write(f"- {rep}")
+        
+    # Intro
+    "Merci d'avoir répondu ! Et maintenant :"
+    
+    # Choix du rendez-vous
+    rendez_vous = st.radio(" ", ["Je souhaite prendre rendez-vous pour une présentation personnalisée", "Je souhaite être rappelé à partir du  :"])
+    if rendez_vous == "Je souhaite être rappelé à partir du  :":
+        date = st.date_input("")
+
+    # envoi des données en session_state
+    st.session_state.liste_reponse3 = [rendez_vous, date]
+
+# bouton pour envoyer à la quatrième partie si le stage est à troisième bloc
+if st.session_state.stage == "troisième bloc":
+    st.button("Suite", on_click=set_stage, args=["quatrième bloc"])
+
+
+# Troisième partie du questionnaire si le stage est à "troisième bloc"
+if st.session_state.stage == "quatrième bloc":
+    # Vérification des données de la troisième partie
+    for rep in st.session_state.liste_reponse3:
+        block.write(f"- {rep}")
+        
+    # Intro
+    "Pour que nous puissions vous recontacter, merci de remplir les information ci dessous :"
+    
+    # questionnaire de contacts
+    nom = st.text_input("Nom")
+    prenom = st.text_input("Prénom")
+    adresse = st.text_input("Adresse")
+    mail = st.text_input("Mail")
+    telephone = st.text_input("Téléphone")
+    horaire_appel = st.text_input("Jours et horaires d'appels")
+    
+    # checkbox choix multiples
+    "support d'appel préféré"
+    choix_mobile = st.checkbox("Mobile")
+    choix_sms = st.checkbox("SMS")
+    choix_messenger = st.checkbox("Messenger")
+    choix_whatshapp = st.checkbox("WhatsApp")
+    choix_mail = st.checkbox("Mail")
+    
+    liste_support_prefere = []
+    # conversion en une liste
+    if choix_mobile:
+        liste_support_prefere.append("Mobile")
+    if choix_sms:
+        liste_support_prefere.append("SMS")
+    if choix_messenger:
+        liste_support_prefere.append("Messenger")
+    if choix_whatshapp:
+        liste_support_prefere.append("WhatsApp")
+    if choix_mail:
+        liste_support_prefere.append("Mail")
+    
+    # envoi des données en session_state
+    st.session_state.liste_reponse4 = [nom, prenom, adresse, mail, telephone, horaire_appel, liste_support_prefere]
+    
+
+# Bouton d'envoi des questions après la quatrieme partie
+if st.session_state.stage == "quatrième bloc":
+    st.button("Envoi des données", on_click=set_stage, args=["Fin"])
+    
+# Affichage final
+if st.session_state.stage == "Fin":
+    # Vérification des données de la quatrième partie
+    for rep in st.session_state.liste_reponse4:
+        block.write(f"- {rep}")
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
