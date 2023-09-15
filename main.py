@@ -142,4 +142,68 @@ if st.button('envoi email'):
 
 
 
+
+
+
+
+# bouton pdf
+if st.button("envoi pdf"):
+    from fpdf import FPDF
+    from reportlab.lib.pagesizes import letter
+    from reportlab.platypus import SimpleDocTemplate, Paragraph
+    from reportlab.lib.styles import getSampleStyleSheet
+
+    # Créer un objet de document PDF
+    pdf_file = "assets/exemple.pdf"
+    document = SimpleDocTemplate(pdf_file, pagesize=letter)
+
+    # Créer un style pour le texte
+    styles = getSampleStyleSheet()
+    style_normal = styles['Normal']
+
+    # Créer une liste de contenu
+    content = []
+
+    # Ajouter du texte au contenu (automatiquement positionné)
+    texte = """
+    Ceci est un exemple de document PDF généré avec Platypus.
+    Le positionnement du texte est géré automatiquement.
+    """
+
+    content.append(Paragraph(texte, style_normal))
+
+    # Générer le PDF
+    document.build(content)
+
+    print(f"Le PDF a été créé : {pdf_file}")
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 footer()
