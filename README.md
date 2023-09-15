@@ -2,13 +2,13 @@
 
 - A faire:
 	- implémenter les choix "autres" avec l'affichage d'un input
-	- envoyer le pdf
-	- mettre à disposition le pdf
 	- gérer l'autocompletion du navigateur dans le formulaire
 	- styliser le questionnaire
 - En cours
+	- envoyer le pdf
 	- comprendre la mise en page pdf avec ReportLab
 - Fait
+	- mettre à disposition le pdf (date:: 15-09-2023 ve)
 	- transformer les réponses en un pdf (date:: 15-09-2023 ve)
 	- monter le formulaire (date:: 15-09-2023 ve)
 	- Gérer les étapes du formulaire (date:: 15-09-2023 ve)
