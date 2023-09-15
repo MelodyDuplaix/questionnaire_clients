@@ -1,7 +1,6 @@
 ## Création d'une application pour permettre de faire remplir un questionnaire à des potentiels nouveaux clients
 
 - A faire:
-	- implémenter les choix "autres" avec l'affichage d'un input
 	- mettre en place des contraintes d'input (inputs obligatoires et contraintes de formats)
 	- gérer l'autocompletion du navigateur dans le formulaire
 	- styliser le questionnaire
