@@ -27,22 +27,32 @@ header_avec_image("Questionnaire", "")
 
 # Formulaire
 
-if 'clicked' not in st.session_state:
-    st.session_state.clicked = False
 
-def click_button(block, liste_reponse1):
-    st.session_state.clicked = True
-    block.write(f"Bienvenue")
-    block.write(liste_reponse1)
+# initialisation du stage 
+if 'stage' not in st.session_state:
+    st.session_state.stage = "début"
 
+#  fonction changement de stage
+def set_stage(i):
+    """change l'état du stage avec l'entrée
 
-if not st.session_state.clicked:
+    Args:
+        i (string): état dans lequel on met le stage
+    """
+    st.session_state.stage = i
+
+    
+
+# Première partie du questionnaire si l'état est à "début"
+if st.session_state.stage == "début":
+    # Introduction
     """
     Bonjour,
 
     Ce questionnaire est une introduction pour savoir s'il serait pertinent pour vous de découvrir nos solutions de bien être. 
     Avant de commencer, par qui avez vous eu ce questionnaire : 
     """
+    # questionnaire
     recommandation = st.text_input("Il m'a été recommandé par :", max_chars=25, placeholder="Nom de la personne", key="recommandation")
     
     alimentation_sante = st.radio(
@@ -62,21 +72,86 @@ if not st.session_state.clicked:
     "Pour finir avec les questions générales, globalement, comment estimez vous votre état actuel de bien-être en général :",
     ["Mauvais", "Passable", "Moyen", "Bon", "Excellent"], value="Moyen")
 
-    liste_reponse1 = [recommandation, alimentation_sante, importance_alimentation, satisfaction_alimentation, regime_alimentaire, etat_bien_etre]
+    # envoi des réponses dans un session_state
+    st.session_state.liste_reponse = [recommandation, alimentation_sante, importance_alimentation, satisfaction_alimentation, regime_alimentaire, etat_bien_etre]
 
+# création d'un container pour y mettre des éléments
 block = st.container()
 block.write("")
 
-if not st.session_state.clicked:
-    submitted = st.button("Envoyer", on_click=click_button, args=[block, liste_reponse1])
+# bouton pour passer à la deuxième partie si l'état du stage est à "début"
+if st.session_state.stage == "début":
+    st.button("Suite", on_click=set_stage, args=["deuxième bloc"])
 
 
+# Deuxième partie du questionnaire si l'état du stage est à "deuxième bloc"
+if st.session_state.stage == "deuxième bloc":
+    
+    # Intro
+    st.write("Maintenant, parlons de vous :")
+    
+    # Vérification des données de la première partie
+    for rep in st.session_state.liste_reponse:
+        block.write(f"- {rep}")
+        
+    # questionnaire checkbox multiples
+    
+    "Si vous deviez changer quelque chose dans votre quotidien, ce serait pour :"
+    choix_stress = st.checkbox("Gérez votre stress")
+    choix_sommeil = st.checkbox("Améliorer votre qualité de sommeil")
+    choix_fatigue = st.checkbox("Diminuer votre fatigue")
+    choix_digestif = st.checkbox("Gagner en confort digestif")
+    choix_peau = st.checkbox("Prendre soin de votre peau")
+    choix_poids = st.checkbox("Gérer votre poids")
+    choix_forme = st.checkbox("Être plus en forme, avoir plus de tonus")
+    choix_fumer = st.checkbox("Arrêter de fumer")
+    choix_sport = st.checkbox("Améliorer mes performances sportives")
+    choix_recuperation = st.checkbox("Mieux récupérer après l’effort")
+    choix_vieillir = st.checkbox("Bien vieillir")
+    choix_autre = st.checkbox("Autre")
+    
+    
+    
+    # Création de la liste avec les checkbox choix multiples
+    liste_reponse2 = []
+    if choix_stress:
+        liste_reponse2.append("Gérez votre stress")
+    if choix_sommeil:
+        liste_reponse2.append("Améliorer votre qualité de sommeil")
+    if choix_fatigue:
+        liste_reponse2.append("Diminuer votre fatigue")
+    if choix_digestif:
+        liste_reponse2.append("Gagner en confort digestif")
+    if choix_peau:
+        liste_reponse2.append("Prendre soin de votre peau")
+    if choix_poids:
+        liste_reponse2.append("Gérer votre poids")
+    if choix_forme:
+        liste_reponse2.append("Être plus en forme, avoir plus de tonus")
+    if choix_fumer:
+        liste_reponse2.append("Arrêter de fumer")
+    if choix_sport:
+        liste_reponse2.append("Améliorer mes performances sportives")
+    if choix_recuperation:
+        liste_reponse2.append("Mieux récupérer après l’effort")
+    if choix_vieillir:
+        liste_reponse2.append("Bien vieillir")
+    if choix_autre:
+        liste_reponse2.append("Autre")
+    
+    # envoi de la liste dans un session_state
+    st.session_state.liste_reponse2 = liste_reponse2
+    
+
+# bouton pour envoyer à la troisième partie si le stage est à deuxième bloc
+if st.session_state.stage == "deuxième bloc":
+    st.button("Envoyer", on_click=set_stage, args=["troisième bloc"])
 
 
-
-
-
-
+# Troisième partie du questionnaire si le stage est à "troisième bloc"
+if st.session_state.stage == "troisième bloc":
+    for rep in st.session_state.liste_reponse2:
+        block.write(f"- {rep}")
 
 
 
