@@ -11,6 +11,11 @@ from bs4 import BeautifulSoup
 import base64  # Importer la bibliothèque base64
 date = datetime.datetime.now().strftime("%d-%m-%Y")
 from PIL import Image
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.application import MIMEApplication
+from getpass import getpass
 
 # Définition des fonctions
 
@@ -182,3 +187,60 @@ def generer_pdf():
     
     return pdf_file
 
+
+
+def envoi_mail():
+    # Informations sur l'expéditeur
+    expediteur = "melo.surseine@gmail.com"
+    # Ouvrir le fichier texte contenant le mot de passe
+    with open("token.txt", "r") as fichier:
+        mot_de_passe = fichier.read().strip()
+
+    # Informations sur le destinataire
+    destinataire = "melo.surseine@gmail.com"
+
+    # Créer un objet MIMEMultipart
+    message = MIMEMultipart()
+
+    # Configurer les détails du message
+    message['From'] = expediteur
+    message['To'] = destinataire
+    message['Subject'] = "Nouvelle Réponse au questionnaire"
+
+    # Corps du message
+    corps_message = f"{st.session_state.liste_reponse4['prenom']} {st.session_state.liste_reponse4['nom']} a répondu au questionnaire. Les réponses sont en pièces jointes."
+
+    # Attacher le corps du message au message
+    message.attach(MIMEText(corps_message, 'plain'))
+
+    # Pièce jointe
+    nom_piece_jointe = f"réponses_questionnaire_{date}.pdf"  # Remplacez par le nom de votre fichier
+    chemin_fichier = f"réponses_questionnaire_{date}.pdf"  # Remplacez par le chemin de votre fichier
+
+    with open(chemin_fichier, "rb") as fichier:
+        piece_jointe = MIMEApplication(fichier.read(), _subtype="txt")
+        piece_jointe.add_header('content-disposition', 'attachment', filename=nom_piece_jointe)
+        message.attach(piece_jointe)
+
+
+    # Établir une connexion avec le serveur SMTP de Gmail
+    serveur_smtp = smtplib.SMTP('smtp.gmail.com', 587)
+    serveur_smtp.starttls()
+
+    # Connexion au compte Gmail
+    serveur_smtp.login(expediteur, mot_de_passe)
+
+    # Envoyer l'e-mail
+    texte_complet = message.as_string()
+    serveur_smtp.sendmail(expediteur, destinataire, texte_complet)
+
+    # Fermer la connexion SMTP
+    serveur_smtp.quit()
+
+    st.success("Réponses envoyé avec succès.")
+
+# def run_pdf(stage):
+#     set_stage(stage)
+#     pdf_file = generer_pdf()
+#     envoi_mail()
+    
