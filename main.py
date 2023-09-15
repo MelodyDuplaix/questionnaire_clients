@@ -41,12 +41,16 @@ def generer_pdf():
     content = []
 
     # Ajouter du texte au contenu (automatiquement positionné)
-    texte = """
+    texte = f"""
     Ceci est un exemple de document PDF généré avec Streamlit.
     Le positionnement du texte est géré automatiquement.
     """
+    texte2 = f"""
+    Personne: {st.session_state.liste_reponse4["prenom"]} ,  {st.session_state.liste_reponse4["nom"]}
+    """
 
     content.append(Paragraph(texte, style_normal))
+    content.append(Paragraph(texte2, style_normal))
 
     # Générer le PDF
     document.build(content)
@@ -82,6 +86,7 @@ def set_stage(i):
 
 # Première partie du questionnaire si l'état est à "début"
 if st.session_state.stage == "début":
+    liste_reponse = {}
     # Introduction
     """
     Bonjour,
@@ -90,27 +95,27 @@ if st.session_state.stage == "début":
     Avant de commencer, par qui avez vous eu ce questionnaire : 
     """
     # questionnaire
-    recommandation = st.text_input("Il m'a été recommandé par :", max_chars=25, placeholder="Nom de la personne", key="recommandation")
+    liste_reponse["recommandation"] = st.text_input("Il m'a été recommandé par :", max_chars=25, placeholder="Nom de la personne", key="recommandation")
     
-    alimentation_sante = st.select_slider(
+    liste_reponse["alimentation_sante"] = st.select_slider(
     "Pensez-vous que les habitudes alimentaires jouent un rôle dans l'état de santé",
     ["Pas du tout", "Plutôt non", "Ca dépends", "Plutôt oui", "Tout à fait"], value="Ca dépends")
     
-    importance_alimentation = st.slider('Sur une échelle de 1 à 10, quelle importance accordez-vous à votre alimentation dans votre vie quotidienne ?', 0, 10, 5)
+    liste_reponse["importance_alimentation"] = st.slider('Sur une échelle de 1 à 10, quelle importance accordez-vous à votre alimentation dans votre vie quotidienne ?', 0, 10, 5)
     
-    satisfaction_alimentation = st.slider('Sur une échelle de 1 à 10, à quel point votre alimentation actuelle vous satisfait-elle ?', 0, 10, 5)
+    liste_reponse["satisfaction_alimentation"] = st.slider('Sur une échelle de 1 à 10, à quel point votre alimentation actuelle vous satisfait-elle ?', 0, 10, 5)
 
-    regime_alimentaire = st.radio(
+    liste_reponse["regime_alimentaire"] = st.radio(
     "Êtes-vous",
     ["Aucun", "Végétarien", "Végétalien", "Flexitarien", "Autre"])
 
 
-    etat_bien_etre = st.select_slider(
+    liste_reponse["etat_bien_etre"] = st.select_slider(
     "Pour finir avec les questions générales, globalement, comment estimez vous votre état actuel de bien-être en général :",
     ["Mauvais", "Passable", "Moyen", "Bon", "Excellent"], value="Moyen")
 
     # envoi des réponses dans un session_state
-    st.session_state.liste_reponse = [recommandation, alimentation_sante, importance_alimentation, satisfaction_alimentation, regime_alimentaire, etat_bien_etre]
+    st.session_state.liste_reponse = liste_reponse
 
 # création d'un container pour y mettre des éléments
 block = st.container()
@@ -123,13 +128,14 @@ if st.session_state.stage == "début":
 
 # Deuxième partie du questionnaire si l'état du stage est à "deuxième bloc"
 if st.session_state.stage == "deuxième bloc":
+    liste_reponse2 = {}
     
     # Intro
     st.write("Maintenant, parlons de vous :")
     
     # Vérification des données de la première partie
     for rep in st.session_state.liste_reponse:
-        block.write(f"- {rep}")
+        block.write(f"{rep} : {st.session_state.liste_reponse[rep]}")
         
     # questionnaire checkbox multiples
     
@@ -147,42 +153,44 @@ if st.session_state.stage == "deuxième bloc":
     choix_vieillir = st.checkbox("Bien vieillir")
     choix_autre = st.checkbox("Autre")
     
-    theme_prefere = st.text_input("Parmi les thèmes abordés précédemment, quel est celui sur lequel vous seriez le plus intéressé(e) à en savoir plus ?")
+    liste_reponse2["theme_prefere"] = st.text_input("Parmi les thèmes abordés précédemment, quel est celui sur lequel vous seriez le plus intéressé(e) à en savoir plus ?")
     
-    accompagnement_perso = st.radio("Si vous deviez changer quelque chose dans votre quotidien, pensez-vous qu'un accompagnement personnalisé et gratuit soit un plus ?", ["non","oui"])
-    interlocuteur_perso = st.radio("Lorsque vous commandez en ligne, préférez-vous avoir un interlocuteur identifié qui puisse vous accompagner au besoin ?", ["non","oui"])
+    liste_reponse2["accompagnement_perso"] = st.radio("Si vous deviez changer quelque chose dans votre quotidien, pensez-vous qu'un accompagnement personnalisé et gratuit soit un plus ?", ["non","oui"])
+    liste_reponse2["interlocuteur_perso"] = st.radio("Lorsque vous commandez en ligne, préférez-vous avoir un interlocuteur identifié qui puisse vous accompagner au besoin ?", ["non","oui"])
     
     
     
     # Création de la liste avec les checkbox choix multiples
-    liste_reponse2 = []
+    liste_checkox2 = []
     if choix_stress:
-        liste_reponse2.append("Gérez votre stress")
+        liste_checkox2.append("Gérez votre stress")
     if choix_sommeil:
-        liste_reponse2.append("Améliorer votre qualité de sommeil")
+        liste_checkox2.append("Améliorer votre qualité de sommeil")
     if choix_fatigue:
-        liste_reponse2.append("Diminuer votre fatigue")
+        liste_checkox2.append("Diminuer votre fatigue")
     if choix_digestif:
-        liste_reponse2.append("Gagner en confort digestif")
+        liste_checkox2.append("Gagner en confort digestif")
     if choix_peau:
-        liste_reponse2.append("Prendre soin de votre peau")
+        liste_checkox2.append("Prendre soin de votre peau")
     if choix_poids:
-        liste_reponse2.append("Gérer votre poids")
+        liste_checkox2.append("Gérer votre poids")
     if choix_forme:
-        liste_reponse2.append("Être plus en forme, avoir plus de tonus")
+        liste_checkox2.append("Être plus en forme, avoir plus de tonus")
     if choix_fumer:
-        liste_reponse2.append("Arrêter de fumer")
+        liste_checkox2.append("Arrêter de fumer")
     if choix_sport:
-        liste_reponse2.append("Améliorer mes performances sportives")
+        liste_checkox2.append("Améliorer mes performances sportives")
     if choix_recuperation:
-        liste_reponse2.append("Mieux récupérer après l’effort")
+        liste_checkox2.append("Mieux récupérer après l'effort")
     if choix_vieillir:
-        liste_reponse2.append("Bien vieillir")
+        liste_checkox2.append("Bien vieillir")
     if choix_autre:
-        liste_reponse2.append("Autre")
+        liste_checkox2.append("Autre")
+        
+    liste_reponse2["choix_multiple"] = liste_checkox2
     
     # envoi de la liste dans un session_state
-    st.session_state.liste_reponse2 = [liste_reponse2, theme_prefere, accompagnement_perso, interlocuteur_perso ]
+    st.session_state.liste_reponse2 = liste_reponse2
     
 
 # bouton pour envoyer à la troisième partie si le stage est à deuxième bloc
@@ -195,22 +203,23 @@ if st.session_state.stage == "deuxième bloc":
 if st.session_state.stage == "troisième bloc":
     
     # creation de la date si il n'en choisit pas
-    date = None
+    liste_reponse3 = {}
+    liste_reponse3["date"] = None
     
     # Vérification des données de la deuxième partie
     for rep in st.session_state.liste_reponse2:
-        block.write(f"- {rep}")
+        block.write(f"{rep} : {st.session_state.liste_reponse2[rep]}")
         
     # Intro
     "Merci d'avoir répondu ! Et maintenant :"
     
     # Choix du rendez-vous
-    rendez_vous = st.radio(" ", ["Je souhaite prendre rendez-vous pour une présentation personnalisée", "Je souhaite être rappelé à partir du  :"])
-    if rendez_vous == "Je souhaite être rappelé à partir du  :":
-        date = st.date_input("")
+    liste_reponse3["rendez_vous"] = st.radio(" ", ["Je souhaite prendre rendez-vous pour une présentation personnalisée", "Je souhaite être rappelé à partir du  :"])
+    if liste_reponse3["rendez_vous"] == "Je souhaite être rappelé à partir du  :":
+        liste_reponse3["date"] = st.date_input("")
 
     # envoi des données en session_state
-    st.session_state.liste_reponse3 = [rendez_vous, date]
+    st.session_state.liste_reponse3 = liste_reponse3
 
 # bouton pour envoyer à la quatrième partie si le stage est à troisième bloc
 if st.session_state.stage == "troisième bloc":
@@ -221,18 +230,19 @@ if st.session_state.stage == "troisième bloc":
 if st.session_state.stage == "quatrième bloc":
     # Vérification des données de la troisième partie
     for rep in st.session_state.liste_reponse3:
-        block.write(f"- {rep}")
+        block.write(f"{rep} : {st.session_state.liste_reponse3[rep]}")
         
     # Intro
     "Pour que nous puissions vous recontacter, merci de remplir les information ci dessous :"
     
     # questionnaire de contacts
-    nom = st.text_input("Nom")
-    prenom = st.text_input("Prénom")
-    adresse = st.text_input("Adresse")
-    mail = st.text_input("Mail")
-    telephone = st.text_input("Téléphone")
-    horaire_appel = st.text_input("Jours et horaires d'appels")
+    liste_reponse4 = {}
+    liste_reponse4["nom"] = st.text_input("Nom")
+    liste_reponse4["prenom"] = st.text_input("Prénom")
+    liste_reponse4["adresse"] = st.text_input("Adresse")
+    liste_reponse4["mail"] = st.text_input("Mail")
+    liste_reponse4["telephone"] = st.text_input("Téléphone")
+    liste_reponse4["horaire_appel"] = st.text_input("Jours et horaires d'appels")
     
     # checkbox choix multiples
     "support d'appel préféré"
@@ -254,9 +264,10 @@ if st.session_state.stage == "quatrième bloc":
         liste_support_prefere.append("WhatsApp")
     if choix_mail:
         liste_support_prefere.append("Mail")
+    liste_reponse4["support"] = liste_support_prefere
     
     # envoi des données en session_state
-    st.session_state.liste_reponse4 = [nom, prenom, adresse, mail, telephone, horaire_appel, liste_support_prefere]
+    st.session_state.liste_reponse4 = liste_reponse4
     
 
 # Bouton d'envoi des questions après la quatrieme partie
@@ -271,8 +282,11 @@ if st.session_state.stage == "quatrième bloc":
 if st.session_state.stage == "Fin":
     # Vérification des données de la quatrième partie
     for rep in st.session_state.liste_reponse4:
-        block.write(f"- {rep}")
+        block.write(f"{rep} : {st.session_state.liste_reponse4[rep]}")
 
+
+
+    # Générer le pdf
     pdf_file = generer_pdf()
     st.success("Le PDF a été généré avec succès!")
 
