@@ -263,6 +263,10 @@ if st.session_state.stage == "quatrième bloc":
 if st.session_state.stage == "quatrième bloc":
     st.button("Envoi des données", on_click=set_stage, args=["Fin"])
     
+    
+    
+    
+
 # Affichage final
 if st.session_state.stage == "Fin":
     # Vérification des données de la quatrième partie

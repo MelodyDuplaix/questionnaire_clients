@@ -2,14 +2,14 @@
 
 - A faire:
 	- implémenter les choix "autres" avec l'afficahge d'un input
-	- comprendre la mise en page pdf avec ReportLab
-	- transformer les réponses en un pdf
 	- envoyer le pdf
 	- mettre à disposition le pdf
 	- styliser le questionnaire
 - En cours
-	- monter le formulaire
+	- transformer les réponses en un pdf
+	- comprendre la mise en page pdf avec ReportLab
 - Fait
+	- monter le formulaire (date:: 15-09-2023 ve)
 	- Gérer les étapes du formulaire (date:: 15-09-2023 ve)
 	- tester la mise à dispo d'une piece jointe (date:: 15-09-2023 ve)
 	- tester la génération d'un pdf (date:: 15-09-2023 ve)
