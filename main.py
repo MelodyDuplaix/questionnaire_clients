@@ -10,6 +10,8 @@ from reportlab.lib.styles import getSampleStyleSheet
 from bs4 import BeautifulSoup
 import base64  # Importer la bibliothèque base64
 
+date = datetime.datetime.now().strftime("%d-%m-%Y")
+
 
 # Configurations
 
@@ -28,76 +30,9 @@ header_avec_image("Questionnaire", "")
 
 
 
-
-# def generer_pdf():
-#     # Créer un objet de document PDF
-#     pdf_file = "assets/exemple.pdf"
-#     document = SimpleDocTemplate(pdf_file, pagesize=letter)
-
-#     # Créer un style pour le texte
-#     styles = getSampleStyleSheet()
-#     style_normal = styles['Normal']
-
-#     # Créer une liste de contenu
-#     content = []
-
-#     # Ajouter du texte au contenu (automatiquement positionné)
-#     texte = f"""
-#     <b>Récapitulatif du questionnaire</b>
-#     """
-#     texte_contacts = f"""
-#     {st.session_state.liste_reponse4["prenom"]}  {st.session_state.liste_reponse4["nom"]}
-#     adresse: {st.session_state.liste_reponse4["adresse"]}
-#     mail: {st.session_state.liste_reponse4["mail"]}
-#     téléphone: {st.session_state.liste_reponse4["telephone"]}
-#     Contact de préférence {st.session_state.liste_reponse4["horaire_appel"]} via {st.session_state.liste_reponse4["support"]}
-#     """
-#     texte_reponses = f"""
-#     recommandé par {st.session_state.liste_reponse["recommandation"]}
-#     <br>
-#     Les habitudes alimentaires jouent un rôle dans l'état de santé : {st.session_state.liste_reponse["alimentation_sante"]}
-#     Vous accordez de l'importance à votre alimentation à {st.session_state.liste_reponse["importance_alimentation"]} sur 10
-#     Votre alimentation actuelle vous satisfait à {st.session_state.liste_reponse["satisfaction_alimentation"]}
-#     Régime alimentaire: {st.session_state.liste_reponse["regime_alimentaire"]}
-#     Etat actuel de bien-être en général: {st.session_state.liste_reponse["etat_bien_etre"]}
-#     """
-#     texte_reponse3 = f"""
-#     Thème qui vous intéresse le plus: {st.session_state.liste_reponse2["theme_prefere"]}
-#     Si vous deviez changer quelque chose dans votre quotidien, pensez-vous qu'un accompagnement personnalisé et gratuit soit un plus ? : {st.session_state.liste_reponse2["accompagnement_perso"]}
-#     Lorsque vous commandez en ligne, préférez-vous avoir un interlocuteur identifié qui puisse vous accompagner au besoin ? : {st.session_state.liste_reponse2["interlocuteur_perso"]}
-#     """
-#     texte_rendez_vous_presentation = f"""
-#     Vous avez choisi un rendez vous pour une présentation personnalisée.
-#     """
-#     texte_rendez_vous_telephone = f"""
-#     Vous avez choisi un rendez vous par téléphone à partir du : {str(st.session_state.liste_reponse3["date"])}
-#     """
-    
-#     texte_contacts = BeautifulSoup(texte_contacts, "html.parser").get_text()
-#     texte_reponses = BeautifulSoup(texte_reponses, "html.parser").get_text()
-#     texte_reponse3 = BeautifulSoup(texte_reponse3, "html.parser").get_text()
-#     texte_rendez_vous_presentation = BeautifulSoup(texte_rendez_vous_presentation, "html.parser").get_text()
-#     texte_rendez_vous_telephone = BeautifulSoup(texte_rendez_vous_telephone, "html.parser").get_text()
-    
-#     content.append(Paragraph(texte, style_normal))
-#     content.append(Paragraph(texte_contacts, style_normal))
-#     content.append(Paragraph(texte_reponses, style_normal))
-#     for rep in st.session_state.liste_reponse2["choix_multiple"]:
-#         content.append(Paragraph(f"- {rep}", style_normal))
-#     content.append(Paragraph(texte_reponse3, style_normal))
-#     if st.session_state.liste_reponse3["rendez_vous"] == "Je souhaite prendre rendez-vous pour une présentation personnalisée":
-#         content.append(Paragraph(texte_rendez_vous_presentation, style_normal))
-#     else:
-#         content.append(Paragraph(texte_rendez_vous_telephone, style_normal))
-
-#     # Générer le PDF
-#     document.build(content)
-
-#     return pdf_file
-
 def generer_pdf():
     # Créer un objet de document PDF
-    pdf_file = "assets/exemple.pdf"
+    pdf_file = f"réponses_questionnaire_{date}.pdf"
     document = SimpleDocTemplate(pdf_file, pagesize=letter)
 
     # Créer un style pour le texte
@@ -116,6 +51,7 @@ def generer_pdf():
     mail: {st.session_state.liste_reponse4["mail"]}<br />
     téléphone: {st.session_state.liste_reponse4["telephone"]}<br />
     Contact de préférence {st.session_state.liste_reponse4["horaire_appel"]} via {st.session_state.liste_reponse4["support"]}<br />
+    <br />
     """
 
     texte_reponses = f"""
@@ -125,17 +61,20 @@ def generer_pdf():
     Votre alimentation actuelle vous satisfait à {st.session_state.liste_reponse["satisfaction_alimentation"]}<br />
     Régime alimentaire: {st.session_state.liste_reponse["regime_alimentaire"]}<br />
     Etat actuel de bien-être en général: {st.session_state.liste_reponse["etat_bien_etre"]}<br />
+    <br />
+    Vous souhaitez changer dans votre quotidien: <br />
     """
 
     texte_reponse3 = f"""
     Thème qui vous intéresse le plus: {st.session_state.liste_reponse2["theme_prefere"]}<br />
     Si vous deviez changer quelque chose dans votre quotidien, pensez-vous qu'un accompagnement personnalisé et gratuit soit un plus ? : {st.session_state.liste_reponse2["accompagnement_perso"]}<br />
     Lorsque vous commandez en ligne, préférez-vous avoir un interlocuteur identifié qui puisse vous accompagner au besoin ? : {st.session_state.liste_reponse2["interlocuteur_perso"]}<br />
+    <br />
     """
 
-    texte_rendez_vous_presentation = f"Vous avez choisi un rendez-vous pour une présentation personnalisée."
+    texte_rendez_vous_presentation = f"Vous avez choisi un rendez-vous pour une présentation personnalisée.<br />"
 
-    texte_rendez_vous_telephone = f"Vous avez choisi un rendez-vous par téléphone à partir du : {str(st.session_state.liste_reponse3['date'])}"
+    texte_rendez_vous_telephone = f"Vous avez choisi un rendez-vous par téléphone à partir du : {str(st.session_state.liste_reponse3['date'])}. <br />"
 
     # Ajouter du texte au contenu du PDF
     content.append(Paragraph(texte, style_normal))
@@ -395,7 +334,7 @@ if st.session_state.stage == "Fin":
     st.download_button(
         label="Télécharger le PDF",
         data=pdf_bytes,
-        file_name="assets/exemple.pdf",  # Nom du fichier PDF
+        file_name=f"réponses_questionnaire_{date}.pdf",  # Nom du fichier PDF
         key="download_pdf",
     )
 
