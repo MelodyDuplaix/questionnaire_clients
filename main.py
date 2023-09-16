@@ -65,7 +65,11 @@ if st.session_state.stage == "début":
 
     liste_reponse["regime_alimentaire"] = st.radio(
     "Êtes-vous",
-    ["Aucun", "Végétarien", "Végétalien", "Flexitarien", "Autre"])
+    ["Aucun", "Végétarien", "Végétalien", "Flexitarien", "Autre :"])
+    liste_reponse["regime_autre"] = ""
+    if liste_reponse["regime_alimentaire"] == "Autre :":
+        liste_reponse["regime_autre"] = st.text_input("Précisez")
+    
 
 
     liste_reponse["etat_bien_etre"] = st.select_slider(
@@ -105,7 +109,10 @@ if st.session_state.stage == "deuxième bloc":
     choix_sport = st.checkbox("Améliorer mes performances sportives")
     choix_recuperation = st.checkbox("Mieux récupérer après l’effort")
     choix_vieillir = st.checkbox("Bien vieillir")
-    choix_autre = st.checkbox("Autre")
+    choix_autre = st.checkbox("Autre :")
+    autre_changement = None
+    if choix_autre:
+        autre_changement = st.text_input("Précisez")
     
     liste_reponse2["theme_prefere"] = st.text_input("Parmi les thèmes abordés précédemment, quel est celui sur lequel vous seriez le plus intéressé(e) à en savoir plus ?")
     
@@ -140,6 +147,8 @@ if st.session_state.stage == "deuxième bloc":
         liste_checkox2.append("Bien vieillir")
     if choix_autre:
         liste_checkox2.append("Autre")
+    if choix_autre:
+        liste_checkox2.append(autre_changement)
         
     liste_reponse2["choix_multiple"] = liste_checkox2
     
@@ -239,7 +248,7 @@ if st.session_state.stage == "Fin":
     st.download_button(
         label="Télécharger le PDF",
         data=pdf_bytes,
-        file_name=f"reponses/réponses_questionnaire_{date}_{st.session_state.liste_reponse4['prenom']}_{st.session_state.liste_reponse4['nom']}.pdf",  # Nom du fichier PDF
+        file_name=f"réponses_questionnaire_{date}_{st.session_state.liste_reponse4['prenom']}_{st.session_state.liste_reponse4['nom']}.pdf",  # Nom du fichier PDF
         key="download_pdf",
     )
 

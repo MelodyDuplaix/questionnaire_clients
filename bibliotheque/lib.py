@@ -182,7 +182,7 @@ def generer_pdf():
     content.append(Paragraph(f"Les habitudes alimentaires jouent un rôle dans l'état de santé : {st.session_state.liste_reponse['alimentation_sante']}", style_normal))
     content.append(Paragraph(f"Importance accordée à l'alimentation : {st.session_state.liste_reponse['importance_alimentation']}/10", style_normal))
     content.append(Paragraph(f"Satisfaction actuelle de l'alimentation : {st.session_state.liste_reponse['satisfaction_alimentation']}/10", style_normal))
-    content.append(Paragraph(f"Régime alimentaire : {st.session_state.liste_reponse['regime_alimentaire']}", style_normal))
+    content.append(Paragraph(f"Régime alimentaire : {st.session_state.liste_reponse['regime_alimentaire']} {st.session_state.liste_reponse['regime_autre']}", style_normal))
     content.append(Paragraph(f"État actuel de bien-être en général : {st.session_state.liste_reponse['etat_bien_etre']}", style_normal))
     content.append(Paragraph("Changements souhaités dans le quotidien :", style_normal))
     for rep in st.session_state.liste_reponse2["choix_multiple"]:

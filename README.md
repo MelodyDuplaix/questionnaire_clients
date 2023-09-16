@@ -6,9 +6,9 @@
 	- styliser le questionnaire
 	- faire un bouton retour en arrière
 - En cours
-	- implémenter les choix "autres" avec l'affichage d'un input
 	- Améliorer la mise en page du pdf
 - Fait
+	- implémenter les choix "autres" avec l'affichage d'un input (date:: 16-09-2023 sa)
 	- comprendre la mise en page pdf avec ReportLab (date:: 15-09-2023 ve)
 	- envoyer le pdf (date:: 15-09-2023 ve)
 	- mettre à disposition le pdf (date:: 15-09-2023 ve)
