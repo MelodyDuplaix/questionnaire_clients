@@ -1,5 +1,3 @@
 st_pages
 reportlab
 beautifulsoup4
-smtplib
-email
