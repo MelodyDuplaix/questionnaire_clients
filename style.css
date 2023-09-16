@@ -57,6 +57,6 @@ p {
 
 
 /* Désactiver la sidebar */
-/* section[data-testid="stSidebar"] {
+section[data-testid="stSidebar"] {
     display: none !important;
-}  */
+} 

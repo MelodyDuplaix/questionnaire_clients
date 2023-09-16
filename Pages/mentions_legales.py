@@ -4,7 +4,7 @@ import streamlit as st
 config_site("centered")
 # sidebar()
 
-st.title("Questionnaire")
+st.title("Mentions Légales")
 
 """
 Ce questionnaire en ligne est fourni par antoinemoure.mgc@gmail.com, ci-après dénommée "nous" ou "notre".

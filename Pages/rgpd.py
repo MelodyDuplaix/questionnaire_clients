@@ -4,7 +4,7 @@ import streamlit as st
 config_site("centered")
 # sidebar()
 
-st.title("Questionnaire")
+st.title("RGPD")
 
 """
 En remplissant ce questionnaire en ligne et en fournissant vos coordonnées pour un rendez-vous ou un rappel, vous consentez à la collecte et au traitement de vos données personnelles conformément au Règlement Général sur la Protection des Données (RGPD) et à la législation applicable en matière de protection des données. Vos données personnelles seront utilisées exclusivement aux fins de la prise de rendez-vous ou du rappel, et elles ne seront en aucun cas partagées, vendues ou utilisées à d'autres fins sans votre consentement explicite.
