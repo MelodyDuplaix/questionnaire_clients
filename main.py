@@ -73,7 +73,7 @@ if st.session_state.stage == "début":
 
     liste_reponse["importance_alimentation"] = st.slider(
         'Sur une échelle de 1 à 10, quelle importance accordez-vous à votre alimentation dans votre vie quotidienne ?',
-        0, 10, 5
+        0, 10, 5,
         key="importance_alimentation"
     )
 
