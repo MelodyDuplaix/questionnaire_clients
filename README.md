@@ -1,12 +1,16 @@
 ## Création d'une application pour permettre de faire remplir un questionnaire à des potentiels nouveaux clients
 
 - A faire:
-	- styliser le questionnaire
-	- faire un bouton retour en arrière
+	- déployer l'application
+	- Faire les RGPD et mentions légales
+	- Précocher les cases des checkbox selon ce que l'utiliateur a cocher si bouton retour
 - En cours
-	- gérer l'autocompletion du navigateur dans le formulaire
+	- styliser le questionnaire
 	- Améliorer la mise en page du pdf
 - Fait
+	- faire un bouton retour en arrière (date:: 16-09-2023 sa)
+	- gérer l'autocompletion du navigateur dans le formulaire (date:: 16-09-2023 sa)
+	- mettre un warning de rafraîchissement=réinitialisation au début du formulaire (date:: 16-09-2023 sa)
 	- mettre en place des contraintes d'input (inputs obligatoires et contraintes de formats) (date:: 16-09-2023 sa)
 	- implémenter les choix "autres" avec l'affichage d'un input (date:: 16-09-2023 sa)
 	- comprendre la mise en page pdf avec ReportLab (date:: 15-09-2023 ve)
