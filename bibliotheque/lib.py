@@ -217,7 +217,7 @@ def generer_pdf():
 
 def envoi_mail():
     # Informations sur l'expéditeur
-    expediteur = "melo.surseine@gmail.com"
+    expediteur = "antoinemoure.beautysane@gmail.com"
     # Ouvrir le fichier texte contenant le mot de passe
     try:
         mot_de_passe = st.secrets["token_mail"]
@@ -226,7 +226,7 @@ def envoi_mail():
             mot_de_passe = fichier.read().strip()
 
     # Informations sur le destinataire
-    destinataire = "melo.surseine@gmail.com"
+    destinataire = "antoinemoure.beautysane@gmail.com"
 
     # Créer un objet MIMEMultipart
     message = MIMEMultipart()
