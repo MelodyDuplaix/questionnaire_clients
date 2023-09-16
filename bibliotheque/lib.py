@@ -31,11 +31,10 @@ def sidebar():
     show_pages(
         [
             Page("main.py", "Home", "🏠"),
-            Page("rgpd.py", "rgpd"),
-            Page("mentions_legales.py", "Mentions légales")   
+            Page("Pages/rgpd.py", "rgpd"),
+            Page("Pages/mentions_legales.py", "Mentions légales")   
         ]
     )
-    st.sidebar.title("Menu")
 
 
 def header_avec_image(f_titre, f_contexte):
