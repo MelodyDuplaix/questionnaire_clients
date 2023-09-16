@@ -20,21 +20,6 @@ from email.mime.application import MIMEApplication
 # Définition des fonctions
 
 
-def sidebar():
-    """
-    Nom : sidebar
-    Paramètres : 0
-    Traitement : configures les pages de la sidebar
-    Retour : un affichage
-    """
-    show_pages(
-        [
-            Page("main.py", "Home", "🏠")
-        ]
-    )
-    st.sidebar.title("Menu")
-
-
 def header_avec_image(f_titre, f_contexte):
     """
     Nom : header_avec_image
