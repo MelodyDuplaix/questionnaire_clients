@@ -218,8 +218,11 @@ def envoi_mail():
     # Informations sur l'expéditeur
     expediteur = "melo.surseine@gmail.com"
     # Ouvrir le fichier texte contenant le mot de passe
-    with open("token.txt", "r") as fichier:
-        mot_de_passe = fichier.read().strip()
+    try:
+        mot_de_passe = st.secrets["token_mail"]
+    except:
+        with open("token.txt", "r") as fichier:
+            mot_de_passe = fichier.read().strip()
 
     # Informations sur le destinataire
     destinataire = "melo.surseine@gmail.com"
