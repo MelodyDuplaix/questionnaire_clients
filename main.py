@@ -9,6 +9,7 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph
 from reportlab.lib.styles import getSampleStyleSheet
 from bs4 import BeautifulSoup
 import base64  # Importer la bibliothèque base64
+import re
 
 import smtplib
 from email.mime.multipart import MIMEMultipart
@@ -197,7 +198,13 @@ if st.session_state.stage == "quatrième bloc":
     liste_reponse4["nom"] = st.text_input("Nom", key="nom", autocomplete="family-name")
     liste_reponse4["adresse"] = st.text_input("Adresse",key="adresse", autocomplete="adress")
     liste_reponse4["mail"] = st.text_input("Mail", key="mail", autocomplete="email")
+    pattern_mail = r'[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,6}'
+    if liste_reponse4["mail"] and not re.match(pattern_mail, liste_reponse4["mail"]):
+        st.error("Le mail n'est pas valide")
     liste_reponse4["telephone"] = st.text_input("Téléphone", key="telephone", autocomplete="tel")
+    pattern_tel = r'(0|\+33)[1-9](\s?[0-9]{2}\s?){3}[0-9]{2}'
+    if liste_reponse4["telephone"] and not re.match(pattern_tel, liste_reponse4["telephone"]):
+        st.error("Le téléphone n'est pas valide")
     liste_reponse4["horaire_appel"] = st.text_input("Jours et horaires d'appels",key="horaire_appel")
     
     # checkbox choix multiples
@@ -228,11 +235,11 @@ if st.session_state.stage == "quatrième bloc":
 
 # Bouton d'envoi des questions après la quatrieme partie
 if st.session_state.stage == "quatrième bloc":
-    verif = not liste_reponse4["prenom"] or not liste_reponse4["nom"] or not liste_reponse4["adresse"] or not liste_reponse4["mail"] or not liste_reponse4["telephone"] or not liste_reponse4["horaire_appel"]
-if st.session_state.stage == "quatrième bloc" and verif :
-    st.error("Tous les champs sont obligatoires")
-if st.session_state.stage == "quatrième bloc" and not verif:
-    st.button("Envoi des données", on_click=set_stage, args=["Fin"])
+    verif_fausse = not liste_reponse4["prenom"] or not liste_reponse4["nom"] or not liste_reponse4["adresse"] or not liste_reponse4["mail"] or not liste_reponse4["telephone"] or not liste_reponse4["horaire_appel"]
+    if verif_fausse :
+        st.error("Tous les champs sont obligatoires")
+    if not verif_fausse and re.match(pattern_mail, liste_reponse4["mail"]) and re.match(pattern_tel, liste_reponse4["telephone"]):
+        st.button("Envoi des données", on_click=set_stage, args=["Fin"])
     
     
     
