@@ -57,24 +57,24 @@ if st.session_state.stage == "début":
     
     liste_reponse["alimentation_sante"] = st.select_slider(
     "Pensez-vous que les habitudes alimentaires jouent un rôle dans l'état de santé",
-    ["Pas du tout", "Plutôt non", "Ca dépends", "Plutôt oui", "Tout à fait"], value="Ca dépends")
+    ["Pas du tout", "Plutôt non", "Ca dépends", "Plutôt oui", "Tout à fait"], value="Ca dépends", key='alimentation_sante')
     
-    liste_reponse["importance_alimentation"] = st.slider('Sur une échelle de 1 à 10, quelle importance accordez-vous à votre alimentation dans votre vie quotidienne ?', 0, 10, 5)
+    liste_reponse["importance_alimentation"] = st.slider('Sur une échelle de 1 à 10, quelle importance accordez-vous à votre alimentation dans votre vie quotidienne ?', 0, 10, 5, key="importance_alimentation")
     
-    liste_reponse["satisfaction_alimentation"] = st.slider('Sur une échelle de 1 à 10, à quel point votre alimentation actuelle vous satisfait-elle ?', 0, 10, 5)
+    liste_reponse["satisfaction_alimentation"] = st.slider('Sur une échelle de 1 à 10, à quel point votre alimentation actuelle vous satisfait-elle ?', 0, 10, 5, key="satisfaction_alimentation")
 
     liste_reponse["regime_alimentaire"] = st.radio(
     "Êtes-vous",
-    ["Aucun", "Végétarien", "Végétalien", "Flexitarien", "Autre :"])
+    ["Aucun", "Végétarien", "Végétalien", "Flexitarien", "Autre :"], key="regime_alimentaire")
     liste_reponse["regime_autre"] = ""
     if liste_reponse["regime_alimentaire"] == "Autre :":
-        liste_reponse["regime_autre"] = st.text_input("Précisez")
+        liste_reponse["regime_autre"] = st.text_input("Précisez", key="regime_autre")
     
 
 
     liste_reponse["etat_bien_etre"] = st.select_slider(
     "Pour finir avec les questions générales, globalement, comment estimez vous votre état actuel de bien-être en général :",
-    ["Mauvais", "Passable", "Moyen", "Bon", "Excellent"], value="Moyen")
+    ["Mauvais", "Passable", "Moyen", "Bon", "Excellent"], value="Moyen", key="etat_bien_etre")
 
     # envoi des réponses dans un session_state
     st.session_state.liste_reponse = liste_reponse
@@ -98,26 +98,26 @@ if st.session_state.stage == "deuxième bloc":
     # questionnaire checkbox multiples
     
     "Si vous deviez changer quelque chose dans votre quotidien, ce serait pour :"
-    choix_stress = st.checkbox("Gérez votre stress")
-    choix_sommeil = st.checkbox("Améliorer votre qualité de sommeil")
-    choix_fatigue = st.checkbox("Diminuer votre fatigue")
-    choix_digestif = st.checkbox("Gagner en confort digestif")
-    choix_peau = st.checkbox("Prendre soin de votre peau")
-    choix_poids = st.checkbox("Gérer votre poids")
-    choix_forme = st.checkbox("Être plus en forme, avoir plus de tonus")
-    choix_fumer = st.checkbox("Arrêter de fumer")
-    choix_sport = st.checkbox("Améliorer mes performances sportives")
-    choix_recuperation = st.checkbox("Mieux récupérer après l’effort")
-    choix_vieillir = st.checkbox("Bien vieillir")
-    choix_autre = st.checkbox("Autre :")
+    choix_stress = st.checkbox("Gérez votre stress", key="stress")
+    choix_sommeil = st.checkbox("Améliorer votre qualité de sommeil", key="choix_sommeil")
+    choix_fatigue = st.checkbox("Diminuer votre fatigue", key="choix_fatigue")
+    choix_digestif = st.checkbox("Gagner en confort digestif", key="choix_digestif")
+    choix_peau = st.checkbox("Prendre soin de votre peau", key="choix_peau")
+    choix_poids = st.checkbox("Gérer votre poids", key="choix_poids")
+    choix_forme = st.checkbox("Être plus en forme, avoir plus de tonus", key="choix_forme")
+    choix_fumer = st.checkbox("Arrêter de fumer", key="choix_fumer")
+    choix_sport = st.checkbox("Améliorer mes performances sportives", key="choix_sport")
+    choix_recuperation = st.checkbox("Mieux récupérer après l’effort", key="choix_recuperation")
+    choix_vieillir = st.checkbox("Bien vieillir", key="choix_vieillir")
+    choix_autre = st.checkbox("Autre :", key="choix_autre")
     autre_changement = None
     if choix_autre:
-        autre_changement = st.text_input("Précisez")
+        autre_changement = st.text_input("Précisez", key="autre_changement")
     
-    liste_reponse2["theme_prefere"] = st.text_input("Parmi les thèmes abordés précédemment, quel est celui sur lequel vous seriez le plus intéressé(e) à en savoir plus ?")
+    liste_reponse2["theme_prefere"] = st.text_input("Parmi les thèmes abordés précédemment, quel est celui sur lequel vous seriez le plus intéressé(e) à en savoir plus ?", key="theme_prefere")
     
-    liste_reponse2["accompagnement_perso"] = st.radio("Si vous deviez changer quelque chose dans votre quotidien, pensez-vous qu'un accompagnement personnalisé et gratuit soit un plus ?", ["non","oui"])
-    liste_reponse2["interlocuteur_perso"] = st.radio("Lorsque vous commandez en ligne, préférez-vous avoir un interlocuteur identifié qui puisse vous accompagner au besoin ?", ["non","oui"])
+    liste_reponse2["accompagnement_perso"] = st.radio("Si vous deviez changer quelque chose dans votre quotidien, pensez-vous qu'un accompagnement personnalisé et gratuit soit un plus ?", ["non","oui"], key="accompagnement_perso")
+    liste_reponse2["interlocuteur_perso"] = st.radio("Lorsque vous commandez en ligne, préférez-vous avoir un interlocuteur identifié qui puisse vous accompagner au besoin ?", ["non","oui"], key="interlocuteur_perso")
     
     
     
@@ -173,9 +173,9 @@ if st.session_state.stage == "troisième bloc":
     "Merci d'avoir répondu ! Et maintenant :"
     
     # Choix du rendez-vous
-    liste_reponse3["rendez_vous"] = st.radio(" ", ["Je souhaite prendre rendez-vous pour une présentation personnalisée", "Je souhaite être rappelé à partir du  :"])
+    liste_reponse3["rendez_vous"] = st.radio(" ", ["Je souhaite prendre rendez-vous pour une présentation personnalisée", "Je souhaite être rappelé à partir du  :"], key="rendez_vous")
     if liste_reponse3["rendez_vous"] == "Je souhaite être rappelé à partir du  :":
-        liste_reponse3["date"] = st.date_input("")
+        liste_reponse3["date"] = st.date_input("", key="date")
 
     # envoi des données en session_state
     st.session_state.liste_reponse3 = liste_reponse3
@@ -193,20 +193,20 @@ if st.session_state.stage == "quatrième bloc":
     
     # questionnaire de contacts
     liste_reponse4 = {}
-    liste_reponse4["nom"] = st.text_input("Nom")
-    liste_reponse4["prenom"] = st.text_input("Prénom")
-    liste_reponse4["adresse"] = st.text_input("Adresse")
-    liste_reponse4["mail"] = st.text_input("Mail")
-    liste_reponse4["telephone"] = st.text_input("Téléphone")
-    liste_reponse4["horaire_appel"] = st.text_input("Jours et horaires d'appels")
+    liste_reponse4["prenom"] = st.text_input("Prénom", key="prenom", autocomplete="given-name")
+    liste_reponse4["nom"] = st.text_input("Nom", key="nom", autocomplete="family-name")
+    liste_reponse4["adresse"] = st.text_input("Adresse",key="adresse", autocomplete="adress")
+    liste_reponse4["mail"] = st.text_input("Mail", key="mail", autocomplete="email")
+    liste_reponse4["telephone"] = st.text_input("Téléphone", key="telephone", autocomplete="tel")
+    liste_reponse4["horaire_appel"] = st.text_input("Jours et horaires d'appels",key="horaire_appel")
     
     # checkbox choix multiples
     "support d'appel préféré"
-    choix_mobile = st.checkbox("Mobile")
-    choix_sms = st.checkbox("SMS")
-    choix_messenger = st.checkbox("Messenger")
-    choix_whatshapp = st.checkbox("WhatsApp")
-    choix_mail = st.checkbox("Mail")
+    choix_mobile = st.checkbox("Mobile",key="choix_mobile")
+    choix_sms = st.checkbox("SMS",key="choix_sms")
+    choix_messenger = st.checkbox("Messenger",key="choix_messenger")
+    choix_whatshapp = st.checkbox("WhatsApp",key="choix_whatsapp")
+    choix_mail = st.checkbox("Mail",key="choix_mail")
     
     liste_support_prefere = []
     # conversion en une liste
@@ -228,6 +228,10 @@ if st.session_state.stage == "quatrième bloc":
 
 # Bouton d'envoi des questions après la quatrieme partie
 if st.session_state.stage == "quatrième bloc":
+    verif = not liste_reponse4["prenom"] or not liste_reponse4["nom"] or not liste_reponse4["adresse"] or not liste_reponse4["mail"] or not liste_reponse4["telephone"] or not liste_reponse4["horaire_appel"]
+if st.session_state.stage == "quatrième bloc" and verif :
+    st.error("Tous les champs sont obligatoires")
+if st.session_state.stage == "quatrième bloc" and not verif:
     st.button("Envoi des données", on_click=set_stage, args=["Fin"])
     
     
