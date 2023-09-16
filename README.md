@@ -7,7 +7,6 @@
 	- déployer l'application
 	- Améliorer la mise en page du pdf
 - Fait
-	- styliser le questionnaire
 > 	- styliser le questionnaire (date:: 16-09-2023 sa)
 	- faire un bouton retour en arrière (date:: 16-09-2023 sa)
 	- gérer l'autocompletion du navigateur dans le formulaire (date:: 16-09-2023 sa)
