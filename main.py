@@ -53,7 +53,7 @@ if 'stage' not in st.session_state:
 
 # Première partie du questionnaire si l'état est à "début"
 if st.session_state.stage == "début":
-    liste_reponse = {}
+    liste_reponse = st.session_state.liste_reponse if 'liste_reponse' in st.session_state else {}
     st.warning("Attention: Si vous rafraichissez la page, le formulaire est réinitialisé")
     # Introduction
     """
@@ -89,13 +89,15 @@ if st.session_state.stage == "début":
     )
 
     choix_regime = ["Aucun", "Végétarien", "Végétalien", "Flexitarien", "Autre :"]
-    liste_reponse["regime_alimentaire"] = st.radio("Êtes-vous",choix_regime,
-        key="regime_alimentaire",
-        index= choix_regime.index(liste_reponse.get("regime_alimentaire", "Aucun")))
+    regime_index = choix_regime.index(liste_reponse.get("regime_alimentaire", "Aucun"))
+    liste_reponse["regime_alimentaire"] = st.radio("Êtes-vous", choix_regime, key="regime_alimentaire", index=regime_index)
 
-    liste_reponse["regime_autre"] = ""
     if liste_reponse["regime_alimentaire"] == "Autre :":
-        liste_reponse["regime_autre"] = st.text_input("Précisez", key="regime_autre", value=liste_reponse.get("regime_autre", ""))
+        regime_autre_value = liste_reponse.get("regime_autre", "")
+        liste_reponse["regime_autre"] = st.text_input("Précisez", key="regime_autre", value=regime_autre_value)
+    else:
+        liste_reponse["regime_autre"] = ""
+
 
     liste_reponse["etat_bien_etre"] = st.select_slider(
         "Pour finir avec les questions générales, globalement, comment estimez vous votre état actuel de bien-être en général :",
