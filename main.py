@@ -68,7 +68,7 @@ if st.session_state.stage == "début":
     liste_reponse["alimentation_sante"] = st.select_slider(
         "Pensez-vous que les habitudes alimentaires jouent un rôle dans l'état de santé",
         ["Pas du tout", "Plutôt non", "Ça dépend", "Plutôt oui", "Tout à fait"],
-        key='alimentation_sante'
+        key='alimentation_sante', value="Ça dépend"
     )
 
     liste_reponse["importance_alimentation"] = st.slider(
