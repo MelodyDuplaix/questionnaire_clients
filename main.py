@@ -96,7 +96,7 @@ if st.session_state.stage == "début":
     liste_reponse["etat_bien_etre"] = st.select_slider(
         "Pour finir avec les questions générales, globalement, comment estimez vous votre état actuel de bien-être en général :",
         ["Mauvais", "Passable", "Moyen", "Bon", "Excellent"],
-        key="etat_bien_etre"
+        key="etat_bien_etre", value="Moyen"
     )
 
     # envoi des réponses dans un session_state
