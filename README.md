@@ -5,9 +5,9 @@
 	- faire un bouton retour en arrière
 - En cours
 	- gérer l'autocompletion du navigateur dans le formulaire
-	- mettre en place des contraintes d'input (inputs obligatoires et contraintes de formats)
 	- Améliorer la mise en page du pdf
 - Fait
+	- mettre en place des contraintes d'input (inputs obligatoires et contraintes de formats) (date:: 16-09-2023 sa)
 	- implémenter les choix "autres" avec l'affichage d'un input (date:: 16-09-2023 sa)
 	- comprendre la mise en page pdf avec ReportLab (date:: 15-09-2023 ve)
 	- envoyer le pdf (date:: 15-09-2023 ve)

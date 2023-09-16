@@ -194,14 +194,14 @@ if st.session_state.stage == "quatrième bloc":
     
     # questionnaire de contacts
     liste_reponse4 = {}
-    liste_reponse4["prenom"] = st.text_input("Prénom", key="prenom", autocomplete="given-name")
-    liste_reponse4["nom"] = st.text_input("Nom", key="nom", autocomplete="family-name")
-    liste_reponse4["adresse"] = st.text_input("Adresse",key="adresse", autocomplete="adress")
-    liste_reponse4["mail"] = st.text_input("Mail", key="mail", autocomplete="email")
+    liste_reponse4["prenom"] = st.text_input("Prénom", key="prenom", autocomplete="given-name", max_chars=25)
+    liste_reponse4["nom"] = st.text_input("Nom", key="nom", autocomplete="family-name", max_chars=25)
+    liste_reponse4["adresse"] = st.text_input("Adresse",key="adresse", autocomplete="adress", max_chars=150)
+    liste_reponse4["mail"] = st.text_input("Mail", key="mail", autocomplete="email", max_chars=50)
     pattern_mail = r'[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,6}'
     if liste_reponse4["mail"] and not re.match(pattern_mail, liste_reponse4["mail"]):
         st.error("Le mail n'est pas valide")
-    liste_reponse4["telephone"] = st.text_input("Téléphone", key="telephone", autocomplete="tel")
+    liste_reponse4["telephone"] = st.text_input("Téléphone", key="telephone", autocomplete="tel",max_chars=15)
     pattern_tel = r'(0|\+33)[1-9](\s?[0-9]{2}\s?){3}[0-9]{2}'
     if liste_reponse4["telephone"] and not re.match(pattern_tel, liste_reponse4["telephone"]):
         st.error("Le téléphone n'est pas valide")
