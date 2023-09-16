@@ -107,8 +107,8 @@ def footer():
     """
     texte = """
     <div class=footer>
-        <a href='mentions_legales' target='_self' class='link'>Mentions légales</a> 
-        <a href='rgpd' target='_self' class='link'>RGPD</a> 
+        <a href='mentions_legales.py' target='_self' class='link'>Mentions légales</a> 
+        <a href='rgpd.py' target='_self' class='link'>RGPD</a> 
     </div>
     """
     st.markdown(texte, unsafe_allow_html=True)
