@@ -90,7 +90,11 @@ def config_site(f_layout):
     st.set_page_config(
         page_title="Questionnaire",
         page_icon="📄",
-        layout=f_layout
+        layout=f_layout,
+        menu_items={
+            "Get Help": "mailto:antoinemoure.mgc@gmail.com",
+            "About" : "https://beautysane.com/?idm=144394"
+        }
     )
     formatage_de_la_page("style.css")
 

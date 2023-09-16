@@ -1,13 +1,14 @@
 ## Création d'une application pour permettre de faire remplir un questionnaire à des potentiels nouveaux clients
 
 - A faire:
-	- déployer l'application
 	- Faire les RGPD et mentions légales
 	- Précocher les cases des checkbox selon ce que l'utiliateur a cocher si bouton retour
 - En cours
-	- styliser le questionnaire
+	- déployer l'application
 	- Améliorer la mise en page du pdf
 - Fait
+	- styliser le questionnaire
+> 	- styliser le questionnaire (date:: 16-09-2023 sa)
 	- faire un bouton retour en arrière (date:: 16-09-2023 sa)
 	- gérer l'autocompletion du navigateur dans le formulaire (date:: 16-09-2023 sa)
 	- mettre un warning de rafraîchissement=réinitialisation au début du formulaire (date:: 16-09-2023 sa)

@@ -54,7 +54,7 @@ if 'stage' not in st.session_state:
 # Première partie du questionnaire si l'état est à "début"
 if st.session_state.stage == "début":
     liste_reponse = {}
-    st.warning("Attention: Si vous rafraichissez la page, le formulaire est réinitilisé")
+    st.warning("Attention: Si vous rafraichissez la page, le formulaire est réinitialisé")
     # Introduction
     """
     Bonjour,

@@ -1,24 +1,4 @@
 
-/* image en haut à gauche */
-.css-1kyxreq {
-    position:absolute;
-    bottom: 10px;
-    right: 200px;
-}
-
-
-/* réduire la hauteur des text_area */
-/* #root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.css-uf99v8.ea3mdgi5 > div.block-container.css-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div.css-r421ms.e10yg2by1 > div:nth-child(1) > div > div:nth-child(3) > div > div.css-1om1ktf.ezh4s2r0 > div > div > textarea, #root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.css-uf99v8.ea3mdgi5 > div.block-container.css-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div.css-r421ms.e10yg2by1 > div:nth-child(1) > div > div:nth-child(2) > div > div.css-1om1ktf.ezh4s2r0 > div > div > textarea, #root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.css-uf99v8.ea3mdgi5 > div.block-container.css-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div.css-r421ms.e10yg2by1 > div:nth-child(1) > div > div:nth-child(1) > div > div.css-1om1ktf.ezh4s2r0 > div > div > textarea, #root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.css-uf99v8.ea3mdgi5 > div.block-container.css-1y4p8pa.ea3mdgi4 > div:nth-child(1) > div > div.css-r421ms.e10yg2by1 > div:nth-child(1) > div > div:nth-child(1) > div > div.css-1om1ktf.ezh4s2r0 > div > div > textarea, #root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.css-uf99v8.ea3mdgi5 > div.block-container.css-1y4p8pa.ea3mdgi4 > div:nth-child(1) > div > div.css-r421ms.e10yg2by1 > div:nth-child(1) > div > div:nth-child(2) > div > div.css-1om1ktf.ezh4s2r0 > div > div > textarea, #root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.css-uf99v8.ea3mdgi5 > div.block-container.css-1y4p8pa.ea3mdgi4 > div:nth-child(1) > div > div.css-r421ms.e10yg2by1 > div:nth-child(1) > div > div:nth-child(3) > div > div.css-1om1ktf.ezh4s2r0 > div > div > textarea {
-    height: 50px !important;
-    min-height: fit-content;
-    overflow-y: hidden;
-} */
-
-/* .css-m8hsoe, .css-1oe5cao {
-    max-height: none !important;
-    height: auto;
-} */
-
 
 /* footer */
 /* #root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.css-uf99v8.ea3mdgi5 > div.block-container.css-1y4p8pa.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(8) {
@@ -51,3 +31,35 @@
     display: none;
 }
 
+
+
+
+/* centrage des boutons */
+.row-widget.stButton {
+    align-items: center;
+    align-self: center;
+    align-content: center;
+    text-align: center;
+}
+
+
+/* centrage du titre */
+h1 {
+    text-align: center;
+    margin-left: 0 !important;
+    position: relative;
+    right: 50px !important;
+    font-family: "Comic Sans Ms";
+}
+.css-10trblm {
+    margin-left:  0 !important;
+    text-align: center !important;
+    position: initial !important; 
+    flex: auto !important;
+}
+
+
+/* taille de police des labels */
+p {
+    font-size: 16px !important; 
+}
