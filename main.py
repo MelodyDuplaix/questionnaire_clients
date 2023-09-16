@@ -18,6 +18,7 @@ date = datetime.datetime.now().strftime("%d-%m-%Y")
 
 
 config_site("centered")
+sidebar()
 
 st.title("Questionnaire")
 
