@@ -1,7 +1,6 @@
 # Import des bibliothèques
 import streamlit as st
 from bibliotheque.lib import  *
-from st_pages import Page, show_pages, add_page_title
 import datetime
 import streamlit as st
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
@@ -108,8 +107,8 @@ def footer():
     """
     texte = """
     <div class=footer>
-        <a href='Mentions Légales' target='_self' class='link'>Mentions légales</a> 
-        <a href='RGPD' target= '_self' class='link'>RGPD</a> 
+        <a href='mentions_legales' target='_self' class='link'>Mentions légales</a> 
+        <a href='rgpd' target='_self' class='link'>RGPD</a> 
     </div>
     """
     st.markdown(texte, unsafe_allow_html=True)
@@ -267,8 +266,39 @@ def envoi_mail():
 
     st.success("Réponses envoyé avec succès.")
 
-# def run_pdf(stage):
-#     set_stage(stage)
-#     pdf_file = generer_pdf()
-#     envoi_mail()
-    
+
+def switch_page(page_name: str):
+    """change de page
+
+    Args:
+        page_name (str): nom de la ou l'on veut emmener
+
+    Raises:
+        RerunException: page non trouvée
+        ValueError: noms des pages dispo
+
+    Returns:
+        _type_: _description_
+    """
+    from streamlit.runtime.scriptrunner import RerunData, RerunException
+    from streamlit.source_util import get_pages
+
+    def standardize_name(name: str) -> str:
+        return name.lower().replace("_", " ")
+
+    page_name = standardize_name(page_name)
+
+    pages = get_pages("main.py")  # OR whatever your main page is called
+
+    for page_hash, config in pages.items():
+        if standardize_name(config["page_name"]) == page_name:
+            raise RerunException(
+                RerunData(
+                    page_script_hash=page_hash,
+                    page_name=page_name,
+                )
+            )
+
+    page_names = [standardize_name(config["page_name"]) for config in pages.values()]
+
+    raise ValueError(f"Could not find page {page_name}. Must be one of {page_names}")

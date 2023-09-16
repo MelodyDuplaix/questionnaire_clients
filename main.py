@@ -1,7 +1,6 @@
 # Import des bibliothèques
 import streamlit as st
 from bibliotheque.lib import *
-from st_pages import Page, show_pages, add_page_title
 import datetime
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Paragraph
@@ -18,12 +17,9 @@ from email.mime.application import MIMEApplication
 date = datetime.datetime.now().strftime("%d-%m-%Y")
 
 
-# Configurations
-
 config_site("centered")
-# sidebar()
 
-header("Questionnaire", "")
+st.title("Questionnaire")
 
 # Code principal
 

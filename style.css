@@ -63,3 +63,9 @@ h1 {
 p {
     font-size: 16px !important; 
 }
+
+
+/* Désactiver la sidebar */
+section[data-testid="stSidebar"] {
+    display: none !important;
+} 
