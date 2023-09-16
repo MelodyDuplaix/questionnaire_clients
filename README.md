@@ -4,6 +4,7 @@
 	- Précocher les cases des checkbox selon ce que l'utiliateur a cocher si bouton retour
 - En cours
 	- Améliorer la mise en page du pdf
+	- corriger et remettre les bouttons de retour en arrière
 - Fait
 	- Faire les RGPD et mentions légales (date:: 16-09-2023 sa)
 	- déployer l'application (date:: 16-09-2023 sa)
