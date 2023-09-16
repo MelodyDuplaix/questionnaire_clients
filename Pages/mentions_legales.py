@@ -29,5 +29,5 @@ Si vous avez des questions ou des préoccupations concernant notre politique de 
 """
 
 if st.button("Questionnaire"):
-    switch_page("main")
+    switch_page("home")
 footer()

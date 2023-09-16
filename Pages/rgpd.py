@@ -13,5 +13,5 @@ Vous avez le droit de retirer votre consentement à tout moment en nous contacta
 """
 
 if st.button("Questionnaire"):
-    switch_page("main")
+    switch_page("home")
 footer()
