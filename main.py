@@ -87,7 +87,7 @@ if st.session_state.stage == "début":
     liste_reponse["regime_alimentaire"] = st.radio("Êtes-vous", choix_regime, key="regime_alimentaire")
 
     liste_reponse["regime_autre"] = ""
-    if liste_reponse["regime_alimentaire"] == "Autre":
+    if liste_reponse["regime_alimentaire"] == "Autre :":
         liste_reponse["regime_autre"] = st.text_input("Précisez", key="regime_autre")
     
         
