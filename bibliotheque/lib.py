@@ -107,8 +107,8 @@ def footer():
     """
     texte = """
     <div class=footer>
-        <a href='Pages/mentions_legales.py' target='_self' class='link'>Mentions légales</a> 
-        <a href='Pages/rgpd.py' target='_self' class='link'>RGPD</a> 
+        <a href='https://melodyduplaix-questionnaire-clients-main-01nxjp.streamlit.app/Pages/mentions_legales' target='_self' class='link'>Mentions légales</a> 
+        <a href='https://melodyduplaix-questionnaire-clients-main-01nxjp.streamlit.app/Pages/rgpd' target='_self' class='link'>RGPD</a> 
     </div>
     """
     st.markdown(texte, unsafe_allow_html=True)
