@@ -196,7 +196,7 @@ def generer_pdf():
     
     # Accompagnement personnalisé et interlocuteur identifié
     content.append(Spacer(1, 12))  # Espace vertical
-    content.append(Paragraph("Choix d'accompagnemant :", style_sous_titre))
+    content.append(Paragraph("Choix d'accompagnement :", style_sous_titre))
     content.append(Paragraph(f"Accompagnement personnalisé et gratuit : {st.session_state.liste_reponse2['accompagnement_perso']}", style_normal))
     content.append(Paragraph(f"Interlocuteur identifié pour les commandes en ligne : {st.session_state.liste_reponse2['interlocuteur_perso']}", style_normal))
     
