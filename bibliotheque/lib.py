@@ -9,7 +9,7 @@ from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-pdfmetrics.registerFont(TTFont('Comic Sans MS', 'assets/ComicSans.ttf'))
+pdfmetrics.registerFont(TTFont('Comic Sans MS', 'assets/comic.ttf'))
 date = datetime.datetime.now().strftime("%d-%m-%Y")
 from PIL import Image
 import smtplib
