@@ -84,7 +84,7 @@ if st.session_state.stage == "début":
         key="satisfaction_alimentation"
     )
 
-    choix_regime = ["Omnivore", "Flexitarien", "Végétalien", "Végétarien", "Autre :"]
+    choix_regime = ["Omnivore", "Flexitarien", "Végétarien", "Végétalien", "Autre :"]
     liste_reponse["regime_alimentaire"] = st.radio("Êtes-vous", choix_regime, key="regime_alimentaire")
 
     liste_reponse["regime_autre"] = ""
