@@ -140,8 +140,7 @@ def generer_pdf():
         textColor=colors.blue,
         alignment=1,
         spaceBefore=12,
-        spaceAfter=12,
-        fontName='Comic Sans MS'
+        spaceAfter=12
     )
     style_sous_titre = ParagraphStyle(
         "StyleSousTitre",
@@ -150,8 +149,7 @@ def generer_pdf():
         textColor=colors.blue,
         alignment=0,
         spaceBefore=12,
-        spaceAfter=12,
-        fontName='Comic Sans MS'
+        spaceAfter=12
     )
     style_normal = ParagraphStyle(
         "StyleNormal",
