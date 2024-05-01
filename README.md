@@ -1,35 +1,27 @@
-## Création d'une application pour permettre de faire remplir un questionnaire à des potentiels nouveaux clients
+# Application de Formulaire avec Génération de PDF et Envoi par E-mail
 
-- A faire:
-	- Précocher les cases des checkbox selon ce que l'utiliateur a cocher si bouton retour
-- En cours
-	- Améliorer la mise en page du pdf
-	- corriger et remettre les bouttons de retour en arrière
-- Fait
-	- Faire les RGPD et mentions légales (date:: 16-09-2023 sa)
-	- déployer l'application (date:: 16-09-2023 sa)
-	- styliser le questionnaire (date:: 16-09-2023 sa)
-	- faire un bouton retour en arrière (date:: 16-09-2023 sa)
-	- gérer l'autocompletion du navigateur dans le formulaire (date:: 16-09-2023 sa)
-	- mettre un warning de rafraîchissement=réinitialisation au début du formulaire (date:: 16-09-2023 sa)
-	- mettre en place des contraintes d'input (inputs obligatoires et contraintes de formats) (date:: 16-09-2023 sa)
-	- implémenter les choix "autres" avec l'affichage d'un input (date:: 16-09-2023 sa)
-	- comprendre la mise en page pdf avec ReportLab (date:: 15-09-2023 ve)
-	- envoyer le pdf (date:: 15-09-2023 ve)
-	- mettre à disposition le pdf (date:: 15-09-2023 ve)
-	- transformer les réponses en un pdf (date:: 15-09-2023 ve)
-	- monter le formulaire (date:: 15-09-2023 ve)
-	- Gérer les étapes du formulaire (date:: 15-09-2023 ve)
-	- tester la mise à dispo d'une piece jointe (date:: 15-09-2023 ve)
-	- tester la génération d'un pdf (date:: 15-09-2023 ve)
-	- tester l'envoie avec une piece jointe (date:: 14-09-2023 je)
-	- (date:: 14-09-2023 je) : Création du dossier et du repo
-	- tester l'envoie d'un mail avec un bouton (date:: 14-09-2023 je)
-	- (date:: 14-09-2023 je) : Création d'un formulaire qui s'efface avec un bouton
+Ce projet d'application a été développé dans le cadre de l'activité professionnelle d'une connaissance, avec pour objectif de créer un formulaire interactif en ligne. L'application permet aux utilisateurs de remplir un formulaire, génère un PDF contenant les réponses saisies, et envoie automatiquement ce PDF par e-mail à l'adresse spécifiée.
 
-## Objectif
+## Contexte
 
-Création d'une application qui affiche un formulaire que des personnes peuvent remplir, l'enregistre au format pdf de préférence, et permet de le télécharger pour la personne. Il envoie aussi un mail au créateur de l'application avec le pdf.
+Le projet est né de la nécessité de créer un moyen simple et efficace pour recueillir des informations via un formulaire en ligne, tout en garantissant la confidentialité et la sécurité des données des utilisateurs. L'application vise à simplifier le processus de collecte d'informations tout en offrant une solution pratique pour stocker et partager ces données sous forme de PDF.
+
+### Fonctionnalités Principales
+
+- **Formulaire Interactif :** Les utilisateurs peuvent remplir un formulaire en ligne avec des champs personnalisés et des options de choix multiples.
+- **Génération de PDF :** Les réponses saisies dans le formulaire sont automatiquement converties en un document PDF structuré et formatté.
+- **Envoi par E-mail :** Le PDF généré est envoyé par e-mail à l'adresse spécifiée par l'utilisateur, garantissant ainsi la disponibilité des informations collectées.
+
+## Tâches Accomplies
+
+Le projet a impliqué plusieurs étapes de développement, notamment la mise en place des RGPD et mentions légales, le déploiement de l'application, la stylisation du questionnaire, la gestion de l'autocomplétion du navigateur, la mise en place de contraintes d'input, et la gestion des choix "autres" avec affichage dynamique.
+
+### Technologies Utilisées
+
+- **Streamlit :** Framework Python pour la création d'applications web interactives.
+- **ReportLab :** Bibliothèque Python pour la création de documents PDF personnalisés.
+- **email.mime :** Module Python pour la composition et l'envoi d'e-mails.
+- **CSS :** Pour la mise en page et le style de l'application web.
 
 ## Lien de l'application 
 https://melodyduplaix-questionnaire-clients-main-01nxjp.streamlit.app/
