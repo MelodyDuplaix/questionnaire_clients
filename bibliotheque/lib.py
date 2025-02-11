@@ -16,25 +16,25 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
-from st_pages import show_pages, Page
+# from st_pages import show_pages, Page
 
 # Définition des fonctions
 
 
-def sidebar():
-    """
-    Nom : sidebar
-    Paramètres : 0
-    Traitement : configures les pages de la sidebar
-    Retour : un affichage
-    """
-    show_pages(
-        [
-            Page("main.py", "Home", "🏠"),
-            Page("Pages/rgpd.py", "rgpd"),
-            Page("Pages/mentions_legales.py", "Mentions légales")   
-        ]
-    )
+# def sidebar():
+#     """
+#     Nom : sidebar
+#     Paramètres : 0
+#     Traitement : configures les pages de la sidebar
+#     Retour : un affichage
+#     """
+#     show_pages(
+#         [
+#             Page("main.py", "Home", "🏠"),
+#             Page("Pages/rgpd.py", "rgpd"),
+#             Page("Pages/mentions_legales.py", "Mentions légales")   
+#         ]
+#     )
 
 
 def header_avec_image(f_titre, f_contexte):
